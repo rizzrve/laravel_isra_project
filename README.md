@@ -35,10 +35,14 @@ ISRA is a comprehensive Information Security Risk Assessment tool developed by D
 
 5. **Environment Setup:**
    ```sh
-   Fill in your database information
-   by referring to the .env.example
-   environment variables file.
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=test_project
+    DB_USERNAME=root
+    DB_PASSWORD=
    ```
+   - Update the environment variables
 
 6. **Generate Application Key:**
    ```sh
@@ -93,11 +97,15 @@ ISRA is a comprehensive Information Security Risk Assessment tool developed by D
    ```
 
 5. **Environment Setup:**
-    ```sh
-   Fill in your database information
-   by referring to the .env.example
-   environment variables file.
+   ```sh
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=test_project
+    DB_USERNAME=root
+    DB_PASSWORD=
    ```
+   - Update the environment variables
 
 6. **Generate Application Key:**
    ```sh
