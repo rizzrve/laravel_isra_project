@@ -143,5 +143,3 @@ ISRA is a comprehensive Information Security Risk Assessment tool developed by D
 
 ## Conclusion
 Follow the above steps to set up and run the ISRA project on both Windows and Linux systems. For any issues, refer to the Laravel and XAMPP documentation.
-# laravel_isra_project
-Information Security Risk Assessment and Risk Treatment Plan (ISRA) Web Development 
