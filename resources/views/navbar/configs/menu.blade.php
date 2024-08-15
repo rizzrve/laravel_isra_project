@@ -19,7 +19,6 @@
                     Users
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">User</a></li>
                     <li><a class="dropdown-item" href="#">User Listing</a></li>
                     <li><a class="dropdown-item" href="#">Assign Project</a></li>
                     <li><a class="dropdown-item" href="#">Status</a></li>
@@ -56,13 +55,32 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Project
+                    Test
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">User</a></li>
-                    <li><a class="dropdown-item" href="#">User Listing</a></li>
-                    <li><a class="dropdown-item" href="#">Assign Project</a></li>
-                    <li><a class="dropdown-item" href="#">Status</a></li>
+                    <li><a class="dropdown-item" href="#">test</a></li>
+                    <li><a class="dropdown-item" href="#">test</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
+                    Test
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Test</a></li>
+                    <li><a class="dropdown-item" href="#">Test</a></li>
+                    <li><a class="dropdown-item" href="#">Test</a></li>
+                    <li><a class="dropdown-item" href="#">Test</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
+                    Test
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Test</a></li>
+                    <li><a class="dropdown-item" href="#">Test</a></li>
+                    <li><a class="dropdown-item" href="#">Test</a></li>
                 </ul>
             </li>
         </ul>

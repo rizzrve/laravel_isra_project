@@ -75,9 +75,11 @@ class AuthController extends Controller
         $user = User::create($data);
 
         if (!$user) {
-            return redirect(route('login'))->with('error', 'Registration failed');
+            session()->flash('error', 'Registration failed. Please try again.');
+            return redirect(route('register'));
         } else {
-            return redirect(route('user'))->with('success', 'Registration successful');
+            session()->flash('success', 'You have successfully registered! Please login to continue.');
+            return redirect(route('login'));
         }
     }
 }
