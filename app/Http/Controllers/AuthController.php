@@ -63,13 +63,14 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|unique:users|email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|confirmed',
             'password_confirmation' => 'required'
         ]);
 
         $data = [
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'is_admin' => 1 // 1 denotes as user, 0 denotes as admin
         ];
 
         $user = User::create($data);

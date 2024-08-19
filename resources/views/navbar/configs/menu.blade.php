@@ -10,28 +10,27 @@
                     Project
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">test</a></li>
-                    <li><a class="dropdown-item" href="#">test</a></li>
+                    <li><a class="dropdown-item" href="/admin/projects">Project Listings</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Users
+                    User
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">User Listing</a></li>
+                    <li><a class="dropdown-item" href="#">User Listings</a></li>
                     <li><a class="dropdown-item" href="#">Assign Project</a></li>
                     <li><a class="dropdown-item" href="#">Status</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Profiles
+                    Profile
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Process</a></li>
                     <li><a class="dropdown-item" href="#">Threat</a></li>
-                    <li><a class="dropdown-item" href="#">Vulbnerabilty</a></li>
+                    <li><a class="dropdown-item" href="#">Vulnerability</a></li>
                 </ul>
             </li>
         </ul>

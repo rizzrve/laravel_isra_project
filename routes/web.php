@@ -22,7 +22,6 @@ Route::post('/register', 'App\Http\Controllers\AuthController@registerPost')->na
 // LOGOUT
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
-
 // ====================================
 // ========== USER REQUESTS ===========
 // ====================================
@@ -40,6 +39,14 @@ Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->na
 // ====================================
 // ========== ADMIN REQUESTS ==========
 // ====================================
+
+// PROJECTS
+Route::get('/admin/projects', 'App\Http\Controllers\Admin\ProjectController@view')->name('admin.projects');
+Route::post('/admin/projects/create', 'App\Http\Controllers\Admin\ProjectController@create')->name('admin.projects.create');
+
+
+
+
 // ADMIN LOGIN
 Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')->name('admin');
 // PROCESS PROFILE
@@ -52,6 +59,6 @@ Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileControl
 Route::get('/admin/vp', 'App\Http\Controllers\Admin\VulnProfileController@view')->name('admin.vp');
 Route::post('/admin/vp/create', 'App\Http\Controllers\Admin\VulnProfileController@create')->name('admin.vp.create');
 // PROJECTS
-Route::get('/admin/project', 'App\Http\Controllers\ViewController@adminProject')->name('admin-project');
+// Route::get('/admin/project', 'App\Http\Controllers\ViewController@adminProject')->name('admin-project');
 // USER MANAGEMENT
 Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')->name('user-management');

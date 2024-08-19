@@ -61,10 +61,10 @@ class ViewController extends Controller
         return view('admin.rtp');
     }
 
-    public function adminProject()
-    {
-        return view('admin.project');
-    }
+    // public function adminProject()
+    // {
+    //     return view('admin.project');
+    // }
 
     public function landing()
     {
