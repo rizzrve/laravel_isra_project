@@ -7,10 +7,36 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
+                    Organization
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Organization List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
                     Project
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/admin/projects">Project Listings</a></li>
+                    <li><a class="dropdown-item" href="/admin/projects">Project List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Threat</a></li>
+                    <li><a class="dropdown-item" href="#">Vulnerability</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
+                    Risk Management
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Risk Assessment</a></li>
+                    <li><a class="dropdown-item" href="#">Risk Treatment Plan</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -19,33 +45,32 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">User Listings</a></li>
-                    <li><a class="dropdown-item" href="#">Assign Project</a></li>
                     <li><a class="dropdown-item" href="#">Status</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Profile
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Process</a></li>
-                    <li><a class="dropdown-item" href="#">Threat</a></li>
-                    <li><a class="dropdown-item" href="#">Vulnerability</a></li>
-                </ul>
-            </li>
+
         </ul>
     </div>
     <div class="d-flex">
         <div class="btn-group">
-            <img src="#" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                style="width: 40px; height: 40px; cursor: pointer; background-color: grey;">
+            <button type="button" class="btn btn-dark rounded-circle circle-btn" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-shield-halved"></i>
+            </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                <li>
+                    <a class="dropdown-item">
+                        <form id="logout" action="{{route('logout')}}" method="POST">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -54,47 +79,45 @@
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
                 <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Test
+                    Risk Management
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">test</a></li>
-                    <li><a class="dropdown-item" href="#">test</a></li>
+                    <li><a class="dropdown-item" href="#">Asset Register</a></li>
+                    <li><a class="dropdown-item" href="#">Risk Assessment</a></li>
+                    <li><a class="dropdown-item" href="#">Risk Treatment Plan</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Test
+                    Profile
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Test</a></li>
-                    <li><a class="dropdown-item" href="#">Test</a></li>
-                    <li><a class="dropdown-item" href="#">Test</a></li>
-                    <li><a class="dropdown-item" href="#">Test</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle no-caret" data-bs-toggle="dropdown" aria-expanded="false">
-                    Test
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Test</a></li>
-                    <li><a class="dropdown-item" href="#">Test</a></li>
-                    <li><a class="dropdown-item" href="#">Test</a></li>
+                    <li><a class="dropdown-item" href="#">Threat Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Vulnerabilities Profile</a></li>
                 </ul>
             </li>
         </ul>
     </div>
     <div class="d-flex">
         <div class="btn-group">
-            <img src="#" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                style="width: 40px; height: 40px; cursor: pointer; background-color: grey;">
+            <button type="button" class="btn btn-dark rounded-circle circle-btn" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+            </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                <li>
+                    <a class="dropdown-item" href="/logout">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -114,5 +137,14 @@
 <style>
     .no-caret::after {
         display: none !important;
+    }
+
+    .circle-btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
     }
 </style>

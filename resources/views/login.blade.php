@@ -11,12 +11,21 @@
         </div>
     @endif
 
+    {{-- @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif --}}
+
     <div class="container align-items-center justify-content-center my-5">
+
         <div class="container text-center fw-bold fs-2 my-5">
             <p>Information Security Risk Assessment</p>
         </div>
+
         <div class="container card w-50 rounded-4">
-            <form id="loginForm" action="{{ route('login.post') }}" method="POST"> @csrf
+            <form id="loginForm" action="{{ route('login.post') }}" method="POST">
+                @csrf
                 <div class="mx-3">
                     <div class="mb-4 my-3">
                         <label class="form-label">Email</label>
@@ -42,9 +51,11 @@
                 </div>
             </form>
         </div>
+
         <div class="container text-center w-50 my-5">
             <p>No account? <a href="/register">Register</a></p>
             <a href="#!">Forgot password?</a>
         </div>
+
     </div>
 @endsection

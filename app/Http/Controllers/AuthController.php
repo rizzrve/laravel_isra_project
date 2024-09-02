@@ -2,80 +2,90 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    // function to redirect user to welcome page
-    public function login()
-    {
-        if (!Auth::check()) {
-            return redirect(route('login'));
-        } else {
-            return redirect(route('user'));
-        }
-    }
-
     // function to logout user
     public function logout(Request $request)
     {
-        Session::flush();
+        Log::info('Logging out:', ['user' => Auth::user()]);
         Auth::logout();
-
-        return redirect(route('login'));
+        Session::flush();
+        $request->session()->regenerate();
+        Log::info('User logged out:', ['user' => Auth::user()]);
+        return redirect('/login');
     }
 
-    // login authenticaltion function
+    // Sending login post request to the server
     public function loginPost(Request $request)
     {
         $request->validate(
-        [
-            'email' => 'required|email',
-            'password' => 'required',
-        ], 
-        [
-            'email.required' => 'The email field is required.',
-            'password.required' => 'The password field is required.',
-        ]);
+            [
+                'email' => 'required|email',
+                'password' => 'required',
+            ],
+            [
+                'email.required' => 'The email field is required.',
+                'password.required' => 'The password field is required.',
+            ]
+        );
 
         // get user credentials
         $credentials = $request->only('email', 'password');
 
-        // check if user credentials are correct
+        // check if user credentials are valid
         if (Auth::attempt($credentials)) {
-            // check if user is an admin
-            if (Auth::user()->is_admin == 0) {
+
+            Log::info('[Controller] authenticated', ['user' => Auth::user()]);
+
+            if (Auth::user()->privilege === 1) {
                 return redirect()->intended(route('admin'));
-            } else {
-                return redirect()->intended(route('user'));
             }
-        } else {
-            return redirect(route('login'))->with('error', 'Invalid credentials');
+
+            return redirect()->intended(route('user'));
         }
+
+        Log::info('[Controller] not authenticated:', ['user' => Auth::user()]);
+
+        return redirect(route('login'))
+            ->with(
+                'error',
+                'Invalid credentials'
+            );
     }
 
     // registration authentication function
     public function registerPost(Request $request)
     {
         $request->validate([
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/',
             'email' => 'required|unique:users|email',
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed|min:5',
             'password_confirmation' => 'required'
         ]);
 
         $data = [
+            'user_id' => mt_rand(100000, 900000),
             'email' => $request->email,
+            'name' => $request->name,
             'password' => Hash::make($request->password),
-            'is_admin' => 1 // 1 denotes as user, 0 denotes as admin
+            'privilege' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'organization' => 'unassigned'
         ];
 
-        $user = User::create($data);
+        $creation = User::create($data);
 
-        if (!$user) {
+        if (!$creation) {
             session()->flash('error', 'Registration failed. Please try again.');
             return redirect(route('register'));
         } else {
