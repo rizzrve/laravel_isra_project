@@ -32,7 +32,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Project ID</th>
-                        <th scope="col">Project</th>
+                        <th scope="col">Project Name</th>
                     </tr>
                 </thead>
 

@@ -34,7 +34,7 @@
                                     <label for="projectTitle{{ $prj->prj_id }}" class="form-label fw-bold">Title:
                                     </label>
                                     <input type="text" class="form-control" id="prj_name{{ $prj->prj_id }}"
-                                        placeholder="{{ $prj->prj_desc }}">
+                                        placeholder="{{ $prj->prj_name}}">
                                 </div>
                                 <div class="mb-3 my-3">
                                     <label for="projectDescription{{ $prj->prj_id }}"
