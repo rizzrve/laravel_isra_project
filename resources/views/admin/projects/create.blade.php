@@ -9,12 +9,12 @@
                 <form action="{{ route('admin.projects.create') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="projectTitle" class="form-label fs-6">Title: </label>
-                        <input class="form-control" type="text" id="projectTitle" name="projectTitle">
+                        <label for="prj_name" class="form-label fs-6">Title: </label>
+                        <input class="form-control" type="text" id="prj_name" name="prj_name">
                     </div>
                     <div class="mb-3">
-                        <label for="projectDescription" class="form-label fs-6">Description: </label>
-                        <textarea class="form-control" type="text" id="projectDescription" name="projectDescription" rows="5"></textarea>
+                        <label for="prj_desc" class="form-label fs-6">Description: </label>
+                        <textarea class="form-control" type="text" id="prj_desc" name="prj_desc" rows="5"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Create</button>

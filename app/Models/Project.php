@@ -13,8 +13,13 @@ class Project extends Model
     protected $table = 'projects';
 
     protected $fillable = [
-        'projectID',
-        'projectTitle',
-        'projectDescription'
+        'prj_id',
+        'prj_name',
+        'prj_desc',
+        'start_date',
+        'end_date',
+        'created_at',
+        'updated_at',
+        'org_id',
     ];
 }

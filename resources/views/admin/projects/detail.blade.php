@@ -1,5 +1,5 @@
-<div class="modal fade my-5" id="view-project-{{ $prj->projectID }}" tabindex="-1" aria-hidden="true"
-    aria-labelledby="projectModalLabel{{ $prj->projectID }}">
+<div class="modal fade my-5" id="view-project-{{ $prj->prj_id }}" tabindex="-1" aria-hidden="true"
+    aria-labelledby="projectModalLabel{{ $prj->prj_id }}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
@@ -26,21 +26,21 @@
                         <div class="container my-5">
                             <form>
                                 <div class="col-12 my-3">
-                                    <label for="projectID{{ $prj->projectID }}" class="form-label fw-bold">ID: </label>
-                                    <input type="text" class="form-control" id="projectID{{ $prj->projectID }}"
-                                        placeholder="{{ $prj->projectID }}" disabled readonly>
+                                    <label for="prj_id{{ $prj->prj_id }}" class="form-label fw-bold">ID: </label>
+                                    <input type="text" class="form-control" id="prj_id{{ $prj->prj_id }}"
+                                        placeholder="{{ $prj->prj_id }}" disabled readonly>
                                 </div>
                                 <div class="col-12 my-3">
-                                    <label for="projectTitle{{ $prj->projectID }}" class="form-label fw-bold">Title:
+                                    <label for="projectTitle{{ $prj->prj_id }}" class="form-label fw-bold">Title:
                                     </label>
-                                    <input type="text" class="form-control" id="projectTitle{{ $prj->projectID }}"
-                                        placeholder="{{ $prj->projectTitle }}">
+                                    <input type="text" class="form-control" id="prj_name{{ $prj->prj_id }}"
+                                        placeholder="{{ $prj->prj_desc }}">
                                 </div>
                                 <div class="mb-3 my-3">
-                                    <label for="projectDescription{{ $prj->projectID }}"
+                                    <label for="projectDescription{{ $prj->prj_id }}"
                                         class="form-label fw-bold">Description: </label>
-                                    <textarea class="form-control" id="projectDescription{{ $prj->projectID }}" rows="3"
-                                        placeholder="{{ $prj->projectDescription }}"></textarea>
+                                    <textarea class="form-control" id="projectDescription{{ $prj->prj_id }}" rows="3"
+                                        placeholder="{{ $prj->prj_desc }}"></textarea>
                                 </div>
                             </form>
                         </div>

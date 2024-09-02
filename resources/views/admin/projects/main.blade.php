@@ -39,11 +39,11 @@
                 <tbody>
                     @foreach ($projects as $prj)
                         <tr>
-                            <td>{{ $prj->projectID }}</td>
-                            <td>{{ $prj->projectTitle }}</td>
+                            <td>{{ $prj->prj_id }}</td>
+                            <td>{{ $prj->prj_name }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#view-project-{{ $prj->projectID }}">
+                                    data-bs-target="#view-project-{{ $prj->prj_id }}">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
                             </td>
