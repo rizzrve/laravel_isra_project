@@ -14,9 +14,9 @@
                 {{-- top btn --}}
                 <div class="container text-center my-5">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary">Risk Register</button>
-                        <button type="button" class="btn btn-primary">Risk Assessment</button>
-                        <button type="button" class="btn btn-primary">Risk Treatment Plan</button>
+                        <button type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk Register</button>
+                        <button type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk Assessment</button>
+                        <button type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk Treatment Plan</button>
                     </div>
                 </div>
 

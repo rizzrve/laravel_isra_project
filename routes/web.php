@@ -109,3 +109,12 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 
 // Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')
 //     ->name('user-management');
+
+
+
+use App\Http\Controllers\OrganizationController;
+
+Route::get('admin/Organization', [OrganizationController::class, 'index']);
+Route::post('/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
+
+
