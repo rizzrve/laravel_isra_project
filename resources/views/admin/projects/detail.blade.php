@@ -22,25 +22,34 @@
 
                 {{-- prj desc --}}
                 <div class="container">
-                    <div class="container my-3">
-                        <div class="container my-5">
-                            <form>
+                    <div class="container">
+                        <div class="container">
+                            <form id="update-project" action="{{ route('admin.projects.update', $prj->prj_id) }}"
+                                method="PATCH">
+                                @csrf
+                                @method('PATCH')
                                 <div class="col-12 my-3">
                                     <label for="prj_id{{ $prj->prj_id }}" class="form-label fw-bold">ID: </label>
                                     <input type="text" class="form-control" id="prj_id{{ $prj->prj_id }}"
                                         placeholder="{{ $prj->prj_id }}" disabled readonly>
                                 </div>
                                 <div class="col-12 my-3">
-                                    <label for="projectTitle{{ $prj->prj_id }}" class="form-label fw-bold">Title:
+                                    <label for="prj_name{{ $prj->prj_id }}" class="form-label fw-bold">
+                                        Title:
                                     </label>
                                     <input type="text" class="form-control" id="prj_name{{ $prj->prj_id }}"
-                                        placeholder="{{ $prj->prj_name}}">
+                                        placeholder="{{ $prj->prj_name }}">
                                 </div>
                                 <div class="mb-3 my-3">
-                                    <label for="projectDescription{{ $prj->prj_id }}"
-                                        class="form-label fw-bold">Description: </label>
-                                    <textarea class="form-control" id="projectDescription{{ $prj->prj_id }}" rows="3"
-                                        placeholder="{{ $prj->prj_desc }}"></textarea>
+                                    <label for="prj_desc{{ $prj->prj_id }}" class="form-label fw-bold">Description:
+                                    </label>
+                                    <textarea class="form-control" id="prj_desc{{ $prj->prj_id }}" rows="3" placeholder="{{ $prj->prj_desc }}"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-target="#save-project"
+                                        data-bs-toggle="modal">
+                                        Save
+                                    </button>
                                 </div>
                             </form>
                         </div>

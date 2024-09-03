@@ -96,7 +96,9 @@ Route::post('/admin/projects/create', 'App\Http\Controllers\Admin\ProjectControl
 
 Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')
     ->name('user-management');
-// });
+
+Route::patch('/admin/projects/update/{id}', 'App\Http\Controllers\Admin\ProjectController@update')
+    ->name('admin.projects.update');
 
 // Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')
 //     ->name('admin');

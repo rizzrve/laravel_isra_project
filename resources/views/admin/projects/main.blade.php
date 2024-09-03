@@ -51,6 +51,9 @@
 
                         {{-- VIEW PROJECT DETAIL MODAL --}}
                         @include('admin.projects.detail')
+                        {{-- SAVE PROJECT MODAL --}}
+                        @include('admin.projects.save')
+                        
                     @endforeach
                 </tbody>
 
@@ -60,6 +63,8 @@
 
     {{-- CREATE PROJECT MODAL --}}
     @include('admin.projects.create')
+
+
 
 @endsection
 
