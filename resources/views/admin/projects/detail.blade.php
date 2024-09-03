@@ -14,9 +14,15 @@
                 {{-- top btn --}}
                 <div class="container text-center my-5">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk Register</button>
-                        <button type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk Assessment</button>
-                        <button type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk Treatment Plan</button>
+                        <button type="button"
+                            class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk
+                            Register</button>
+                        <button type="button"
+                            class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk
+                            Assessment</button>
+                        <button type="button"
+                            class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left me-2">Risk
+                            Treatment Plan</button>
                     </div>
                 </div>
 
@@ -25,31 +31,35 @@
                     <div class="container">
                         <div class="container">
                             <form id="update-project" action="{{ route('admin.projects.update', $prj->prj_id) }}"
-                                method="PATCH">
+                                method="POST">
                                 @csrf
                                 @method('PATCH')
+
                                 <div class="col-12 my-3">
-                                    <label for="prj_id{{ $prj->prj_id }}" class="form-label fw-bold">ID: </label>
-                                    <input type="text" class="form-control" id="prj_id{{ $prj->prj_id }}"
+                                    <label class="form-label fw-bold" for="prj_id{{ $prj->prj_id }}">
+                                        ID:
+                                    </label>
+                                    <input class="form-control" type="text" id="prj_id{{ $prj->prj_id }}"
                                         placeholder="{{ $prj->prj_id }}" disabled readonly>
                                 </div>
+
                                 <div class="col-12 my-3">
-                                    <label for="prj_name{{ $prj->prj_id }}" class="form-label fw-bold">
+                                    <label class="form-label fw-bold">
                                         Title:
                                     </label>
-                                    <input type="text" class="form-control" id="prj_name{{ $prj->prj_id }}"
+                                    <input class="form-control" type="text" id="prj_name" name="prj_name"
                                         placeholder="{{ $prj->prj_name }}">
                                 </div>
+
                                 <div class="mb-3 my-3">
-                                    <label for="prj_desc{{ $prj->prj_id }}" class="form-label fw-bold">Description:
+                                    <label class="form-label fw-bold">
+                                        Description:
                                     </label>
-                                    <textarea class="form-control" id="prj_desc{{ $prj->prj_id }}" rows="3" placeholder="{{ $prj->prj_desc }}"></textarea>
+                                    <textarea class="form-control" id="prj_desc" rows="3" name="prj_desc" placeholder="{{ $prj->prj_desc }}"></textarea>
                                 </div>
+
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-bs-target="#save-project"
-                                        data-bs-toggle="modal">
-                                        Save
-                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -59,3 +69,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('update-project').addEventListener('submit', function(event) {
+        console.log('Form is being submitted');
+    });
+</script>

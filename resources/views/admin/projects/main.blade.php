@@ -52,7 +52,7 @@
                         {{-- VIEW PROJECT DETAIL MODAL --}}
                         @include('admin.projects.detail')
                         {{-- SAVE PROJECT MODAL --}}
-                        @include('admin.projects.save')
+                        {{-- @include('admin.projects.save') --}}
                         
                     @endforeach
                 </tbody>

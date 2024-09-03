@@ -88,17 +88,10 @@ Route::middleware('user')->group(function () {
 Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')
     ->name('admin');
 
-Route::get('/admin/projects', 'App\Http\Controllers\Admin\ProjectController@view')
-    ->name('admin.projects');
-
-Route::post('/admin/projects/create', 'App\Http\Controllers\Admin\ProjectController@create')
-    ->name('admin.projects.create');
-
 Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')
     ->name('user-management');
 
-Route::patch('/admin/projects/update/{id}', 'App\Http\Controllers\Admin\ProjectController@update')
-    ->name('admin.projects.update');
+
 
 // Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')
 //     ->name('admin');
@@ -113,10 +106,19 @@ Route::patch('/admin/projects/update/{id}', 'App\Http\Controllers\Admin\ProjectC
 //     ->name('user-management');
 
 
+// ====================================
+// Standardized Routing Structure
+// ====================================
 
 use App\Http\Controllers\OrganizationController;
 
 Route::get('admin/Organization', [OrganizationController::class, 'index']);
 Route::post('/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 
+// ====================================
 
+use App\Http\Controllers\Admin\ProjectController;
+
+Route::get('admin/projects/', [ProjectController::class, 'view'])->name('admin.projects');
+Route::post('admin/projects/', [ProjectController::class, 'create'])->name('admin.projects.create');
+Route::patch('admin/projects/{id}', [ProjectController::class, 'update'])->name('admin.projects.update');

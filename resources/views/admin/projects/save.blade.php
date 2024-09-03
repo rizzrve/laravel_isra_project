@@ -1,4 +1,4 @@
-<div class="modal fade" id="save-project" aria-hidden="true" tabindex="-1">
+<div class="modal fade" id="save-project-modal" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
