@@ -114,6 +114,33 @@ use App\Http\Controllers\OrganizationController;
 
 Route::get('/admin/Organization', [OrganizationController::class, 'index']);
 Route::post('/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
+Route::resource('organizations', OrganizationController::class);
+Route::put('/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+Route::get('/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+Route::put('/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+Route::get('/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+Route::delete('/organizations/{organization}', [OrganizationController::class, 'destroy'])->name('organizations.destroy');
+
+
+
+
+
+
+
+// routes/web.php
+
+/* use App\Http\Controllers\ProfileController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+ */
+
+
 
 // ====================================
 
