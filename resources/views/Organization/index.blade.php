@@ -1,12 +1,9 @@
-
 @extends('base.layout')
 @section('title', 'ISRA')
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
     @include('navbar.layout')
     
     <meta charset="UTF-8">
@@ -20,19 +17,37 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Organization Name</th>
                     <th>Logo</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($organizations as $organizations)
+                @foreach ($organizations as $organization)
                     <tr>
-                        <td>{{ $organizations->org_name }}</td>
+                        <td>{{ $organization->org_name }}</td>
                         <td>
-                            @if ($organizations->logo)
-                                <img src="{{ asset('storage/' . $organizations->org_logo) }}" alt="Logo" width="100">
+                            @if ($organization->org_logo)
+                            <img src="{{ asset('storage/' . $organization->org_logo) }}" alt="Logo" width="100">
+
+                            @else
+                                No Logo
                             @endif
                         </td>
+                        <td>
+                            <!-- Edit Button -->
+                            <a href="{{ route('organizations.edit', $organization->org_id) }}" class="btn btn-warning">Edit</a>
+
+                             <!-- Delete Button -->
+                            <form action="{{ route('organizations.destroy', $organization->org_id) }}" method="POST" style="display:inline;">
+                             @csrf
+                             @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this organization?')">Delete</button>
+                            </form>
+                        </td>
+
+                        
+                        
                     </tr>
                 @endforeach
             </tbody>
@@ -46,12 +61,12 @@
             <form action="{{ route('organizations.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div>
-                    <label for="title">Title:</label>
-                    <input type="text" name="title" id="title" required>
+                    <label for="org_name">Title:</label>
+                    <input type="text" name="org_name" id="org_name" required>
                 </div>
                 <div>
-                    <label for="logo">Logo:</label>
-                    <input type="file" name="logo" id="logo">
+                    <label for="org_logo">Logo:</label>
+                    <input type="file" name="org_logo" id="org_logo">
                 </div>
                 <button type="submit">Add</button>
                 <button type="button" onclick="closeModal()">Close</button>
