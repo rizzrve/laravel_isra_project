@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -44,16 +45,17 @@ class ProjectController extends Controller
     // ====================================
     // UPDATE
     // ====================================
-    public function update(Request $request, $id)
+    public function update(Request $request, $prj_id)
     {
         $request->validate([
             'prj_name' => 'required|string',
             'prj_desc' => 'required|string'
         ]);
 
-        $project = Project::findOrFail($id);
+        $project = Project::findOrFail($prj_id);
 
         if (!$project) {
+            Log::error('[ ProjectController - update() ] Project not found');
             return redirect(route('admin/projects'))
                 ->with(
                     'error',
@@ -66,6 +68,7 @@ class ProjectController extends Controller
             $savePrj = $project->save();
 
             if (!$savePrj) {
+                Log::error('[ ProjectController - update() ] Failed to save project');
                 return redirect(route('admin/projects'))
                     ->with(
                         'error',

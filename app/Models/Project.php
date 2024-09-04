@@ -11,6 +11,8 @@ class Project extends Model
     use HasFactory, Notifiable;
 
     protected $table = 'projects';
+    
+    protected $primaryKey = 'prj_id';
 
     protected $fillable = [
         'prj_id',
