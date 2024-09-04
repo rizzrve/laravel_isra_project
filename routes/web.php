@@ -112,13 +112,13 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 
 use App\Http\Controllers\OrganizationController;
 
-Route::get('admin/Organization', [OrganizationController::class, 'index']);
+Route::get('/admin/Organization', [OrganizationController::class, 'index']);
 Route::post('/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 
 // ====================================
 
 use App\Http\Controllers\Admin\ProjectController;
 
-Route::get('admin/projects/', [ProjectController::class, 'view'])->name('admin.projects');
-Route::post('admin/projects/', [ProjectController::class, 'create'])->name('admin.projects.create');
-Route::patch('admin/projects/{id}', [ProjectController::class, 'update'])->name('admin.projects.update');
+Route::get('/admin/projects', [ProjectController::class, 'view'])->name('admin.projects');
+Route::post('/admin/projects', [ProjectController::class, 'create'])->name('admin.projects.create');
+Route::patch('/admin/projects/{id}/update', [ProjectController::class, 'update'])->name('admin.projects.update');

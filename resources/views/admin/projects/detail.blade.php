@@ -59,6 +59,7 @@
                                 </div>
 
                                 <div class="modal-footer">
+                                    {{-- <button data-bs-target="#save-project-modal" data-bs-toggle="modal" class="btn btn-primary">Save</button> --}}
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>

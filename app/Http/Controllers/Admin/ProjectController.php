@@ -47,34 +47,29 @@ class ProjectController extends Controller
     // ====================================
     public function update(Request $request, $prj_id)
     {
-        $request->validate([
-            'prj_name' => 'required|string',
-            'prj_desc' => 'required|string'
-        ]);
+        $project = Project::where('prj_id', $prj_id)->first();
+        return redirect()->back()->withErrors(['error' => 'Project not found']);
 
-        $project = Project::findOrFail($prj_id);
+        try {
+            $validatedData = $request->validate([
+                'prj_name' => 'nullable|string',
+                'prj_desc' => 'nullable|string'
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        }
 
-        if (!$project) {
-            Log::error('[ ProjectController - update() ] Project not found');
-            return redirect(route('admin/projects'))
-                ->with(
-                    'error',
-                    'Project not found'
-                );
-        } else {
-            $project->prj_name = $request->input('prj_name');
-            $project->prj_desc = $request->input('prj_desc');
-
-            $savePrj = $project->save();
-
-            if (!$savePrj) {
-                Log::error('[ ProjectController - update() ] Failed to save project');
-                return redirect(route('admin/projects'))
-                    ->with(
-                        'error',
-                        'Failed to save project'
-                    );
+        try {
+            if (isset($validatedData['prj_name'])) {
+                $project->prj_name = $validatedData['prj_name'];
             }
+            if (isset($validatedData['prj_desc'])) {
+                $project->prj_desc = $validatedData['prj_desc'];
+            }
+            $project->updated_at = now();
+            $project->save();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Failed to update project']);
         }
 
         return redirect(route('admin.projects'));
