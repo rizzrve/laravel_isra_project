@@ -28,8 +28,7 @@
                         <td>{{ $organization->org_name }}</td>
                         <td>
                             @if ($organization->org_logo)
-                            <img src="{{ asset('storage/' . $organization->org_logo) }}" alt="Logo" width="100">
-
+                                <img src="{{ asset('storage/logos/' . $organization->org_logo) }}" alt="Logo" width="100">
                             @else
                                 No Logo
                             @endif

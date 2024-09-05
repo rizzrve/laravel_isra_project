@@ -13,7 +13,7 @@
 
     <div class="container align-items-center justify-content-center my-5">
         <h2 class="container text-center fw-bold fs-2 my-5">
-            <p>Information Security Risk Assessment</p>
+            <p>Register</p>
         </h2>
 
         <div class="container card w-50 rounded-4">
