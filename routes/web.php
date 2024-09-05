@@ -109,7 +109,7 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 // ====================================
 // Standardized Routing Structure
 // ====================================
-use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\Admin\OrganizationController;
 
 
 Route::get('/admin/Organization', [OrganizationController::class, 'index']);

@@ -48,7 +48,9 @@ class ProjectController extends Controller
     public function update(Request $request, $prj_id)
     {
         $project = Project::where('prj_id', $prj_id)->first();
-        return redirect()->back()->withErrors(['error' => 'Project not found']);
+        if (!$project) {
+            return redirect()->back()->withErrors(['error' => 'Project not found']);
+        }
 
         try {
             $validatedData = $request->validate([
