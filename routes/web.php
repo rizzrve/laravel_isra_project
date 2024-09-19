@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\ViewController@landing')
     ->name('landing');
 
-
 // ===================================
 // ===== AUTHENTICATION ROUTES =======
 // ===================================
@@ -32,15 +31,15 @@ Route::post('/logout', 'App\Http\Controllers\AuthController@logout')
 // ========== USER REQUESTS ===========
 // ====================================
 // user
- Route::get('/user', 'App\Http\Controllers\ViewController@user')->name('user');
+Route::get('/user', 'App\Http\Controllers\ViewController@user')->name('user');
 
 // Views
 Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')->name('admin-dashboard');
- Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->name('admin.genre');
- Route::get('/admin/project/rr', 'App\Http\Controllers\ViewController@adminRR')->name('admin-rr');
- Route::get('/admin/project/ra', 'App\Http\Controllers\ViewController@adminRA')->name('admin-ra');
+Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->name('admin.genre');
+Route::get('/admin/project/rr', 'App\Http\Controllers\ViewController@adminRR')->name('admin-rr');
+Route::get('/admin/project/ra', 'App\Http\Controllers\ViewController@adminRA')->name('admin-ra');
 Route::get('/admin/project/rtp', 'App\Http\Controllers\ViewController@adminRTP')->name('admin-rtp');
- Route::get('/admin/project/all', 'App\Http\Controllers\ViewController@adminAll')->name('admin-all');
+Route::get('/admin/project/all', 'App\Http\Controllers\ViewController@adminAll')->name('admin-all');
 
 // ====================================
 // ========== ADMIN REQUESTS ==========
@@ -69,15 +68,15 @@ Route::get('/admin/project/rtp', 'App\Http\Controllers\ViewController@adminRTP')
 // USER MANAGEMENT
 // Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')->name('user-management');
 
- Route::group(['middleware' => 'AdminRoute'], function () {
-     Route::get('/admin/pp', 'App\Http\Controllers\Admin\ProcessProfileController@view')->name('admin.pp');
-     Route::post('/admin/pp/create', 'App\Http\Controllers\Admin\ProcessProfileController@create')->name('admin.pp.create');
+Route::group(['middleware' => 'AdminRoute'], function () {
+    Route::get('/admin/pp', 'App\Http\Controllers\Admin\ProcessProfileController@view')->name('admin.pp');
+    Route::post('/admin/pp/create', 'App\Http\Controllers\Admin\ProcessProfileController@create')->name('admin.pp.create');
     Route::get('/admin/tp', 'App\Http\Controllers\Admin\ThreatProfileController@view')->name('admin.tp');
-     Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileController@create')->name('admin.tp.create');
-     Route::get('/admin/vp', 'App\Http\Controllers\Admin\VulnProfileController@view')->name('admin.vp');
-     Route::post('/admin/vp/create', 'App\Http\Controllers\Admin\VulnProfileController@create')->name('admin.vp.create');
+    Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileController@create')->name('admin.tp.create');
+    Route::get('/admin/vp', 'App\Http\Controllers\Admin\VulnProfileController@view')->name('admin.vp');
+    Route::post('/admin/vp/create', 'App\Http\Controllers\Admin\VulnProfileController@create')->name('admin.vp.create');
     Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->name('admin.genre');
- });
+});
 
 Route::middleware('user')->group(function () {
     Route::get('/user', 'App\Http\Controllers\ViewController@user')
@@ -111,7 +110,6 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 // ====================================
 use App\Http\Controllers\Admin\OrganizationController;
 
-
 Route::get('/admin/Organization', [OrganizationController::class, 'index']);
 Route::post('/admin/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 Route::resource('/admin/organizations', OrganizationController::class);
@@ -124,12 +122,17 @@ Route::get('/admin/organizations/{organization}/edit', [OrganizationController::
 Route::resource('/admin/organizations', OrganizationController::class);
 Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
 
+// ====================================
+// ORGANIZATION ROUTES [in-progress]
+// ====================================
 
+use App\Http\Controllers\Admin\TestOrganizationController;
 
+Route::get('/admin/test/organizations', [TestOrganizationController::class, 'view'])->name('test.organizations');
+Route::post('/admin/test/organizations/create', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
+Route::patch('/admin/test/organizations/{id}/update', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
 
-
-
-
+// ====================================
 
 
 // routes/web.php
@@ -146,7 +149,8 @@ Route::middleware('auth')->group(function () {
  */
 
 
-
+// ====================================
+// PROJECT ROUTES [completed]
 // ====================================
 
 use App\Http\Controllers\Admin\ProjectController;
@@ -155,9 +159,10 @@ Route::get('/admin/projects', [ProjectController::class, 'view'])->name('admin.p
 Route::post('/admin/projects', [ProjectController::class, 'create'])->name('admin.projects.create');
 Route::patch('/admin/projects/{id}/update', [ProjectController::class, 'update'])->name('admin.projects.update');
 
+// ====================================
+
 
 Route::group(['AdminRoute'], function () {
     Route::get('/admin/tp', 'App\Http\Controllers\Admin\ThreatProfileController@view')->name('admin.tp');
     Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileController@create')->name('admin.tp.create');
 });
-

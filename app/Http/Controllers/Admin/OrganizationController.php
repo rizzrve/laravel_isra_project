@@ -15,8 +15,14 @@ class OrganizationController extends Controller
         return view('organization.index', compact('organizations'));
     }
 
-    public function edit($org_id)
+    public function view()
+    {
+        $organizations = Organization::all();
+        return view('admin.organizations.main', compact('organizations'));
+    }
 
+    // edit starts from this function
+    public function edit($org_id)
     {
         $organization = Organization::findOrFail($org_id);
         return view('organization.edit', compact('organization'));
@@ -45,7 +51,7 @@ class OrganizationController extends Controller
     }
 
 
-
+    // to this function
     public function update(Request $request, $org_id)
     {
         $request->validate([
