@@ -36,10 +36,11 @@ class TestOrganizationController extends Controller
         ]);
 
         $organization = new Organization;
-        $organization->org_name = $validated['org_name'];
-        $organization->org_id = mt_rand(10, 90);
 
+        $organization->org_id = mt_rand(10, 90);
+        $organization->org_name = $validated['org_name'];
         $organization->org_logo = $this->handleImageUpload($request, 'org_logo');
+
         $organization->save();
 
         return redirect()->back();
@@ -71,11 +72,13 @@ class TestOrganizationController extends Controller
         return redirect()->back();
     }
 
-    public function handleImageUpload(Request $request, $fieldName)
+    private function handleImageUpload(Request $request, $fieldName)
     {
-        $validated = $request->validate([$fieldName => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048']);
-        $imageName = time() . '_' . $request->file($fieldName)->getClientOriginalName();
-        $request->file($fieldName)->move('public/images', $imageName);
-        return 'public/images/' . $imageName;
+        if ($request->hasFile($fieldName)) {
+            $file = $request->file($fieldName);
+            $path = $file->store('public/logos');
+            return Storage::url($path);
+        }
+        return null;
     }
 }

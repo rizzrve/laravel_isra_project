@@ -8,7 +8,6 @@
             <div class="modal-body">
                 <form action="{{ route('test.organizations.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PATCH')
                     <div class="mb-3">
                         <label for="org_name" class="form-label fs-6">Title: </label>
                         <input class="form-control" type="text" id="org_name" name="org_name">

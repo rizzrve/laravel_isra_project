@@ -108,19 +108,19 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 // ====================================
 // Standardized Routing Structure
 // ====================================
-use App\Http\Controllers\Admin\OrganizationController;
+// use App\Http\Controllers\Admin\OrganizationController;
 
-Route::get('/admin/Organization', [OrganizationController::class, 'index']);
-Route::post('/admin/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
-Route::resource('/admin/organizations', OrganizationController::class);
-Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-Route::delete('/admin/organizations/{organization}', [OrganizationController::class, 'destroy'])->name('organizations.destroy');
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-Route::resource('/admin/organizations', OrganizationController::class);
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+// Route::get('/admin/Organization', [OrganizationController::class, 'index']);
+// Route::post('/admin/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
+// Route::resource('/admin/organizations', OrganizationController::class);
+// Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+// Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+// Route::delete('/admin/organizations/{organization}', [OrganizationController::class, 'destroy'])->name('organizations.destroy');
+// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+// Route::resource('/admin/organizations', OrganizationController::class);
+// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
 
 // ====================================
 // ORGANIZATION ROUTES [in-progress]
