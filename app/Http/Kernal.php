@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
 
     protected $routeMiddleware = [
         // Other middleware
-        'AdminRoute' => \App\Http\Middleware\AdminRoute::class,
+        'auth' => \App\Http\Middleware\Authenticate::class, // Ensure the 'auth' middleware is registered
+
     ];
      
     /**
