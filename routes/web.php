@@ -159,6 +159,47 @@ Route::get('/admin/projects', [ProjectController::class, 'view'])->name('admin.p
 Route::post('/admin/projects', [ProjectController::class, 'create'])->name('admin.projects.create');
 Route::patch('/admin/projects/{id}/update', [ProjectController::class, 'update'])->name('admin.projects.update');
 
+use App\Http\Controllers\ThreatGroupController;
+use App\Http\Controllers\ThreatController;
+
+Route::prefix('user/profile/threats')->group(function() {
+    Route::get('/', [ThreatController::class, 'index'])->name('threats.index');
+    Route::get('/create', [ThreatController::class, 'create'])->name('threats.create');
+    Route::post('/', [ThreatController::class, 'store'])->name('threats.store');
+    Route::get('/{threat}/edit', [ThreatController::class, 'edit'])->name('threats.edit');
+    Route::put('/{threat}', [ThreatController::class, 'update'])->name('threats.update');
+    Route::delete('/{threat}', [ThreatController::class, 'destroy'])->name('threats.destroy');
+
+    // Threat Group management
+    Route::get('/groups/create', [ThreatGroupController::class, 'create'])->name('threat-groups.create');
+    Route::post('/groups', [ThreatGroupController::class, 'store'])->name('threat-groups.store');
+    Route::get('/groups/{group}/edit', [ThreatGroupController::class, 'edit'])->name('threat-groups.edit');
+    Route::put('/groups/{group}', [ThreatGroupController::class, 'update'])->name('threat-groups.update');
+    Route::delete('/groups/{group}', [ThreatGroupController::class, 'destroy'])->name('threat-groups.destroy');
+
+
+
+});
+
+use App\Http\Controllers\VulnerabilityController;
+use App\Http\Controllers\VulnerabilityGroupController;
+
+Route::prefix('user/profile/Vulnerability')->group(function() {
+    Route::get('/', [VulnerabilityController::class, 'index'])->name('vulnerabilities.index');
+    Route::get('/create', [VulnerabilityController::class, 'create'])->name('vulnerabilities.create');
+    Route::post('/', [VulnerabilityController::class, 'store'])->name('vulnerabilities.store');
+    Route::get('/{vulnerability}/edit', [VulnerabilityController::class, 'edit'])->name('vulnerabilities.edit');
+    Route::put('/{vulnerability}', [VulnerabilityController::class, 'update'])->name('vulnerabilities.update');
+    Route::delete('/{vulnerability}', [VulnerabilityController::class, 'destroy'])->name('vulnerabilities.destroy');
+
+    // Vulnerability Group management
+    Route::get('/groups/create', [VulnerabilityGroupController::class, 'create'])->name('vulnerability-groups.create');
+    Route::post('/groups', [VulnerabilityGroupController::class, 'store'])->name('vulnerability-groups.store');
+    Route::get('/groups/{group}/edit', [VulnerabilityGroupController::class, 'edit'])->name('vulnerability-groups.edit');
+    Route::put('/groups/{group}', [VulnerabilityGroupController::class, 'update'])->name('vulnerability-groups.update');
+    Route::delete('/groups/{group}', [VulnerabilityGroupController::class, 'destroy'])->name('vulnerability-groups.destroy');
+});
+
 // ====================================
 
 
