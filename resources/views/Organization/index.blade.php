@@ -3,14 +3,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('navbar.layout')
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizations</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
+
 <body>
     <div class="container mt-5">
         <h1>Organizations</h1>
@@ -22,31 +24,33 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach ($organizations as $organization)
                     <tr>
                         <td>{{ $organization->org_name }}</td>
                         <td>
                             @if ($organization->org_logo)
-                                <img src="{{ asset('storage/logos/' . $organization->org_logo) }}" alt="Logo" width="100">
+                                <img src="{{ asset('storage/logos/' . $organization->org_logo) }}" alt="Logo"
+                                    width="100">
                             @else
                                 No Logo
                             @endif
                         </td>
                         <td>
                             <!-- Edit Button -->
-                            <a href="{{ route('organizations.edit', $organization->org_id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('organizations.edit', $organization->org_id) }}"
+                                class="btn btn-warning">Edit</a>
 
-                             <!-- Delete Button -->
-                            <form action="{{ route('organizations.destroy', $organization->org_id) }}" method="POST" style="display:inline;">
-                             @csrf
-                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this organization?')">Delete</button>
+                            <!-- Delete Button -->
+                            <form action="{{ route('organizations.destroy', $organization->org_id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete this organization?')">Delete</button>
                             </form>
                         </td>
-
-                        
-                        
                     </tr>
                 @endforeach
             </tbody>
@@ -83,4 +87,5 @@
         }
     </script>
 </body>
+
 </html>
