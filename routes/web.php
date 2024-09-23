@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 // ===================================
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 // ===================================
 Route::get('/', 'App\Http\Controllers\ViewController@landing')
     ->name('landing');
+
 
 // ===================================
 // ===== AUTHENTICATION ROUTES =======
@@ -31,52 +33,23 @@ Route::post('/logout', 'App\Http\Controllers\AuthController@logout')
 // ========== USER REQUESTS ===========
 // ====================================
 // user
-Route::get('/user', 'App\Http\Controllers\ViewController@user')->name('user');
+ Route::get('/user', 'App\Http\Controllers\ViewController@user')->name('user');
 
 // Views
 Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')->name('admin-dashboard');
-Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->name('admin.genre');
-Route::get('/admin/project/rr', 'App\Http\Controllers\ViewController@adminRR')->name('admin-rr');
-Route::get('/admin/project/ra', 'App\Http\Controllers\ViewController@adminRA')->name('admin-ra');
+ Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->name('admin.genre');
+ Route::get('/admin/project/rr', 'App\Http\Controllers\ViewController@adminRR')->name('admin-rr');
+ Route::get('/admin/project/ra', 'App\Http\Controllers\ViewController@adminRA')->name('admin-ra');
 Route::get('/admin/project/rtp', 'App\Http\Controllers\ViewController@adminRTP')->name('admin-rtp');
-Route::get('/admin/project/all', 'App\Http\Controllers\ViewController@adminAll')->name('admin-all');
-
-// ====================================
-// ========== ADMIN REQUESTS ==========
-// ====================================
-
-// PROJECTS
-// Route::get('/admin/projects', 'App\Http\Controllers\Admin\ProjectController@view')->name('admin.projects');
-// Route::post('/admin/projects/create', 'App\Http\Controllers\Admin\ProjectController@create')->name('admin.projects.create');
+ Route::get('/admin/project/all', 'App\Http\Controllers\ViewController@adminAll')->name('admin-all');
 
 
 
 
-// ADMIN LOGIN
-// Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')->name('admin');
-// PROCESS PROFILE
-// Route::get('/admin/pp', 'App\Http\Controllers\Admin\ProcessProfileController@view')->name('admin.pp');
-// Route::post('/admin/pp/create', 'App\Http\Controllers\Admin\ProcessProfileController@create')->name('admin.pp.create');
-// THREAT PROFILE
-// Route::get('/admin/tp', 'App\Http\Controllers\Admin\ThreatProfileController@view')->name('admin.tp');
-// Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileController@create')->name('admin.tp.create');
-// VULNERABILITY PROFILE
-// Route::get('/admin/vp', 'App\Http\Controllers\Admin\VulnProfileController@view')->name('admin.vp');
-// Route::post('/admin/vp/create', 'App\Http\Controllers\Admin\VulnProfileController@create')->name('admin.vp.create');
-// PROJECTS
-// Route::get('/admin/project', 'App\Http\Controllers\ViewController@adminProject')->name('admin-project');
-// USER MANAGEMENT
-// Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')->name('user-management');
 
-Route::group(['middleware' => 'AdminRoute'], function () {
-    Route::get('/admin/pp', 'App\Http\Controllers\Admin\ProcessProfileController@view')->name('admin.pp');
-    Route::post('/admin/pp/create', 'App\Http\Controllers\Admin\ProcessProfileController@create')->name('admin.pp.create');
-    Route::get('/admin/tp', 'App\Http\Controllers\Admin\ThreatProfileController@view')->name('admin.tp');
-    Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileController@create')->name('admin.tp.create');
-    Route::get('/admin/vp', 'App\Http\Controllers\Admin\VulnProfileController@view')->name('admin.vp');
-    Route::post('/admin/vp/create', 'App\Http\Controllers\Admin\VulnProfileController@create')->name('admin.vp.create');
-    Route::get('/admin/genre', 'App\Http\Controllers\ViewController@adminGenre')->name('admin.genre');
-});
+
+
+
 
 Route::middleware('user')->group(function () {
     Route::get('/user', 'App\Http\Controllers\ViewController@user')
@@ -89,6 +62,28 @@ Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')
 
 Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')
     ->name('user-management');
+
+  // routes/web.php
+
+
+
+
+    
+    
+
+  
+    use App\Http\Controllers\Admin\AdminThreatController;
+
+    Route::resource('admin/profile/threats', AdminThreatController::class)
+    ->names([
+        'index' => 'admin.profile.threats.index',
+        'create' => 'threats.create',
+        'store' => 'threats.store',
+        'edit' => 'admin.profile.threats.edit',
+        'update' => 'admin.profile.threats.update',
+        'destroy' => 'admin.profile.threats.destroy',
+    ]);
+
 
 
 
@@ -108,31 +103,27 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 // ====================================
 // Standardized Routing Structure
 // ====================================
-// use App\Http\Controllers\Admin\OrganizationController;
+use App\Http\Controllers\Admin\OrganizationController;
 
-// Route::get('/admin/Organization', [OrganizationController::class, 'index']);
-// Route::post('/admin/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
-// Route::resource('/admin/organizations', OrganizationController::class);
-// Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
-// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-// Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
-// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-// Route::delete('/admin/organizations/{organization}', [OrganizationController::class, 'destroy'])->name('organizations.destroy');
-// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-// Route::resource('/admin/organizations', OrganizationController::class);
-// Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
 
-// ====================================
-// ORGANIZATION ROUTES [in-progress]
-// ====================================
+Route::get('/admin/Organization', [OrganizationController::class, 'index']);
+Route::post('/admin/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
+Route::resource('/admin/organizations', OrganizationController::class);
+Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
+Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+Route::delete('/admin/organizations/{organization}', [OrganizationController::class, 'destroy'])->name('organizations.destroy');
+Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+Route::resource('/admin/organizations', OrganizationController::class);
+Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
 
-use App\Http\Controllers\Admin\TestOrganizationController;
 
-Route::get('/admin/test/organizations', [TestOrganizationController::class, 'view'])->name('test.organizations');
-Route::post('/admin/test/organizations/create', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
-Route::patch('/admin/test/organizations/{id}/update', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
 
-// ====================================
+
+
+
+
 
 
 // routes/web.php
@@ -149,8 +140,7 @@ Route::middleware('auth')->group(function () {
  */
 
 
-// ====================================
-// PROJECT ROUTES [completed]
+
 // ====================================
 
 use App\Http\Controllers\Admin\ProjectController;
@@ -158,6 +148,7 @@ use App\Http\Controllers\Admin\ProjectController;
 Route::get('/admin/projects', [ProjectController::class, 'view'])->name('admin.projects');
 Route::post('/admin/projects', [ProjectController::class, 'create'])->name('admin.projects.create');
 Route::patch('/admin/projects/{id}/update', [ProjectController::class, 'update'])->name('admin.projects.update');
+
 
 use App\Http\Controllers\ThreatGroupController;
 use App\Http\Controllers\ThreatController;
@@ -198,12 +189,4 @@ Route::prefix('user/profile/Vulnerability')->group(function() {
     Route::get('/groups/{group}/edit', [VulnerabilityGroupController::class, 'edit'])->name('vulnerability-groups.edit');
     Route::put('/groups/{group}', [VulnerabilityGroupController::class, 'update'])->name('vulnerability-groups.update');
     Route::delete('/groups/{group}', [VulnerabilityGroupController::class, 'destroy'])->name('vulnerability-groups.destroy');
-});
-
-// ====================================
-
-
-Route::group(['AdminRoute'], function () {
-    Route::get('/admin/tp', 'App\Http\Controllers\Admin\ThreatProfileController@view')->name('admin.tp');
-    Route::post('/admin/tp/create', 'App\Http\Controllers\Admin\ThreatProfileController@create')->name('admin.tp.create');
 });

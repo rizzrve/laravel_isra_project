@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 namespace App\Console;
@@ -7,7 +10,16 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $routeMiddleware = [
+        // Other middleware
+        'auth' => \App\Http\Middleware\Authenticate::class, // Ensure the 'auth' middleware is registered
+
+    ];
+     
     /**
+     * 
+     * 
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
@@ -24,10 +36,5 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
-
-    protected $routeMiddleware = [
-        // Other middleware
-        'AdminRoute' => \App\Http\Middleware\AdminRoute::class,
-    ];
-    
 }
+

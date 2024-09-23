@@ -27,7 +27,7 @@
                     Profile
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Threat</a></li>
+                    <li><a class="dropdown-item" href="/admin/profile/threats">Threat</a></li>
                     <li><a class="dropdown-item" href="#">Vulnerability</a></li>
                 </ul>
             </li>
@@ -93,8 +93,9 @@
                     Profile
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Threat Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Vulnerabilities Profile</a></li>
+                    <li><a class="dropdown-item" href="/user/profile/threats">Threat Profile</a></li>
+                    <li><a class="dropdown-item" href="/user/profile/Vulnerability">Vulnerabilities Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Process Profile</a></li>
                 </ul>
             </li>
         </ul>
