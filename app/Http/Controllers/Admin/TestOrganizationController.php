@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\Log;
 
 class TestOrganizationController extends Controller
 {
@@ -21,6 +23,7 @@ class TestOrganizationController extends Controller
     // ====================================
     public function view()
     {
+        Debugbar::info('Organizations View');
         $organizations = Organization::all();
         return view('admin.organizations.main', compact('organizations'));
     }
@@ -30,20 +33,29 @@ class TestOrganizationController extends Controller
     // ====================================
     public function create(Request $request)
     {
-        $validated = $request->validate([
-            'org_name' => 'required|string|max:255',
-            'org_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        try {
+            $validated = $request->validate([
+                'org_name' => 'required|string|max:255',
+                'org_logo' => 'nullable|image|max:2048',
+            ]);
 
-        $organization = new Organization;
+            $organization = new Organization([
+                'org_name' => $validated['org_name'],
+                'org_id' => random_int(10, 90),
+            ]);
 
-        $organization->org_id = mt_rand(10, 90);
-        $organization->org_name = $validated['org_name'];
-        $organization->org_logo = $this->handleImageUpload($request, 'org_logo');
+            if ($request->hasFile('org_logo')) {
+                $organization->org_logo = $request->file('org_logo')->store('org_logo', 'public');
+            }
 
-        $organization->save();
+            $organization->save();
 
-        return redirect()->back();
+            return redirect()->back()->with('success', 'Organization created successfully.');
+
+        } catch (\Exception $e) {
+            
+            return redirect()->back()->withErrors(['error' => 'An error occurred while creating the organization.']);
+        }
     }
 
     // ====================================

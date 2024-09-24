@@ -68,25 +68,6 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 
 
 
-    
-    
-
-  
-    use App\Http\Controllers\Admin\AdminThreatController;
-
-    Route::resource('admin/profile/threats', AdminThreatController::class)
-    ->names([
-        'index' => 'admin.profile.threats.index',
-        'create' => 'threats.create',
-        'store' => 'threats.store',
-        'edit' => 'admin.profile.threats.edit',
-        'update' => 'admin.profile.threats.update',
-        'destroy' => 'admin.profile.threats.destroy',
-    ]);
-
-
-
-
 // Route::get('/admin', 'App\Http\Controllers\ViewController@adminDashboard')
 //     ->name('admin');
 
@@ -98,32 +79,6 @@ Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementC
 
 // Route::get('/admin/user-management', 'App\Http\Controllers\Admin\UserManagementController@view')
 //     ->name('user-management');
-
-
-// ====================================
-// Standardized Routing Structure
-// ====================================
-use App\Http\Controllers\Admin\OrganizationController;
-
-
-Route::get('/admin/Organization', [OrganizationController::class, 'index']);
-Route::post('/admin/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
-Route::resource('/admin/organizations', OrganizationController::class);
-Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-Route::put('/admin/organizations/{organization}', [OrganizationController::class, 'update'])->name('organizations.update');
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-Route::delete('/admin/organizations/{organization}', [OrganizationController::class, 'destroy'])->name('organizations.destroy');
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-Route::resource('/admin/organizations', OrganizationController::class);
-Route::get('/admin/organizations/{organization}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
-
-
-
-
-
-
-
 
 
 // routes/web.php
@@ -194,6 +149,11 @@ Route::prefix('user/profile/Vulnerability')->group(function() {
     Route::delete('/groups/{group}', [VulnerabilityGroupController::class, 'destroy'])->name('vulnerability-groups.destroy');
 });
 
+use App\Http\Controllers\Admin\TestOrganizationController;
+
+Route::get('/admin/test/organizations', [TestOrganizationController::class, 'view'])->name('test.organizations');
+Route::post('/admin/test/organizations/create', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
+Route::patch('/admin/test/organizations/{id}/update', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
 use App\Http\Controllers\AssetRegisterController;
 
 Route::prefix('user/asset_register')->group(function () {
@@ -210,12 +170,12 @@ use App\Http\Controllers\Admin\AdminThreatGroupController;
 
 
 Route::prefix('admin/profile/threats')->group(function() {
-    Route::get('/', [AdminThreatController::class, 'index'])->name('threats.index');
-    Route::get('/create', [AdminThreatController::class, 'create'])->name('threats.create');
-    Route::post('/', [AdminThreatController::class, 'store'])->name('threats.store');
-    Route::get('/{threat}/edit', [AdminThreatController::class, 'edit'])->name('threats.edit');
-    Route::put('/{threat}', [AdminThreatController::class, 'update'])->name('threats.update');
-    Route::delete('/{threat}', [AdminThreatController::class, 'destroy'])->name('threats.destroy');
+    // Route::get('/', [AdminThreatGroupController::class, 'index'])->name('threats.index');
+    // Route::get('/create', [AdminThreatGroupController::class, 'create'])->name('threats.create');
+    // Route::post('/', [AdminThreatGroupController::class, 'store'])->name('threats.store');
+    // Route::get('/{threat}/edit', [AdminThreatGroupController::class, 'edit'])->name('threats.edit');
+    // Route::put('/{threat}', [AdminThreatGroupController::class, 'update'])->name('threats.update');
+    // Route::delete('/{threat}', [AdminThreatGroupController::class, 'destroy'])->name('threats.destroy');
 
     // Threat Group management
     Route::get('/groups/create', [AdminThreatGroupController::class, 'create'])->name('threat-groups.create');
