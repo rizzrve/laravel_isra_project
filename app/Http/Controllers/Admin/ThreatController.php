@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Threat;
 use App\Models\ThreatGroup;
 use Illuminate\Http\Request;
 
-class ThreatController extends Controller
+class ThreatController extends AdminThreatController
 {
     public function index()
     {
         $groups = ThreatGroup::with('threats')->get();
-        return view('user.profile.threats.index', compact('groups'));
+        return view('admin.profile.threats.index', compact('groups'));
     }
 
     public function create()
     {
         $groups = ThreatGroup::all();
-        return view('user.profile.threats.create', compact('groups'));
+        return view('admin.profile.threats.create', compact('groups'));
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class ThreatController extends Controller
     {
         $threat = Threat::findOrFail($id);
         $groups = ThreatGroup::all();
-        return view('user.profile.threats.edit', compact('threat', 'groups'));
+        return view('admin.profile.threats.edit', compact('threat', 'groups'));
     }
 
     public function update(Request $request, $id)
@@ -58,13 +58,4 @@ class ThreatController extends Controller
         $threat->delete();
         return redirect()->route('threats.index')->with('success', 'Threat deleted successfully.');
     }
-
-    public function getThreatsByGroup($groupId)
-{
-    $threats = Threat::where('threat_group_id', $groupId)->get();
-    return view('partials.threats', compact('threats')); // Create this view for threats
-}
-
-
-
 }
