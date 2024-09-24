@@ -170,12 +170,12 @@ use App\Http\Controllers\Admin\AdminThreatGroupController;
 
 
 Route::prefix('admin/profile/threats')->group(function() {
-    Route::get('/', [AdminThreatController::class, 'index'])->name('threats.index');
-    Route::get('/create', [AdminThreatController::class, 'create'])->name('threats.create');
-    Route::post('/', [AdminThreatController::class, 'store'])->name('threats.store');
-    Route::get('/{threat}/edit', [AdminThreatController::class, 'edit'])->name('threats.edit');
-    Route::put('/{threat}', [AdminThreatController::class, 'update'])->name('threats.update');
-    Route::delete('/{threat}', [AdminThreatController::class, 'destroy'])->name('threats.destroy');
+    // Route::get('/', [AdminThreatGroupController::class, 'index'])->name('threats.index');
+    // Route::get('/create', [AdminThreatGroupController::class, 'create'])->name('threats.create');
+    // Route::post('/', [AdminThreatGroupController::class, 'store'])->name('threats.store');
+    // Route::get('/{threat}/edit', [AdminThreatGroupController::class, 'edit'])->name('threats.edit');
+    // Route::put('/{threat}', [AdminThreatGroupController::class, 'update'])->name('threats.update');
+    // Route::delete('/{threat}', [AdminThreatGroupController::class, 'destroy'])->name('threats.destroy');
 
     // Threat Group management
     Route::get('/groups/create', [AdminThreatGroupController::class, 'create'])->name('threat-groups.create');
