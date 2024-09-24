@@ -10,7 +10,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="org_name" class="form-label fs-6">Title: </label>
-                        <input class="form-control" type="text" id="org_name" name="org_name">
+                        <input class="form-control" type="text" id="org_name" name="org_name" required>
                     </div>
                     <div class="mb-3">
                         <label for="org_logo" class="form-label">Logo: </label>

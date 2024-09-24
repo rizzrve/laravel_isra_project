@@ -152,8 +152,11 @@ Route::prefix('user/profile/Vulnerability')->group(function() {
 use App\Http\Controllers\Admin\TestOrganizationController;
 
 Route::get('/admin/test/organizations', [TestOrganizationController::class, 'view'])->name('test.organizations');
-Route::post('/admin/test/organizations/create', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
+Route::post('/admin/test/organizations', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
 Route::patch('/admin/test/organizations/{id}/update', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
+
+
+
 use App\Http\Controllers\AssetRegisterController;
 
 Route::prefix('user/asset_register')->group(function () {

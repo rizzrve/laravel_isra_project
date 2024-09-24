@@ -12,13 +12,6 @@ use Illuminate\Support\Facades\Log;
 class TestOrganizationController extends Controller
 {
     // ====================================
-    // available routes
-    // Route::get('/admin/test/organizations', [OrganizationController::class, 'view'])->name('test.organizations');
-    // Route::post('/admin/test/organizations', [OrganizationController::class, 'create'])->name('test.organizations.create');
-    // Route::patch('/admin/test/organizations/{id}/update', [OrganizationController::class, 'update'])->name('test.organizations.update');
-    // ====================================
-
-    // ====================================
     // READ
     // ====================================
     public function view()
@@ -41,7 +34,6 @@ class TestOrganizationController extends Controller
 
             $organization = new Organization([
                 'org_name' => $validated['org_name'],
-                'org_id' => random_int(10, 90),
             ]);
 
             if ($request->hasFile('org_logo')) {
@@ -53,19 +45,17 @@ class TestOrganizationController extends Controller
             return redirect()->back()->with('success', 'Organization created successfully.');
 
         } catch (\Exception $e) {
-            
+            Log::error($e->getMessage());
             return redirect()->back()->withErrors(['error' => 'An error occurred while creating the organization.']);
         }
     }
 
     // ====================================
     // UPDATE
-    // input: org_name, org_logo
-    // method: PATCH
     // ====================================
     public function update(Request $request, $org_id)
     {
-        $organization = Organization::where('org_id', $org_id)->first();
+        $organization = Organization::find($org_id);
         if (!$organization) {
             return redirect()->back()->withErrors(['error' => 'Organization not found']);
         }
@@ -81,15 +71,13 @@ class TestOrganizationController extends Controller
         }
 
         $organization->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Organization updated successfully.');
     }
 
     private function handleImageUpload(Request $request, $fieldName)
     {
         if ($request->hasFile($fieldName)) {
-            $file = $request->file($fieldName);
-            $path = $file->store('public/logos');
-            return Storage::url($path);
+            return $request->file($fieldName)->store('org_logo', 'public');
         }
         return null;
     }
