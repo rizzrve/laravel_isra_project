@@ -1,44 +1,56 @@
-<!-- In your Blade view file (e.g., index.blade.php) -->
 @extends('base.layout')
 
-@section('title', 'Threats List')
+@section('title' , 'Create Vulnerability')
 
 @section('content')
 
+@include('navbar.layout')
+<div class="container">
+    <h1>Threats</h1>
 
-    {{-- NAVBAR --}}
-    @include('navbar.layout')
-    
-    <div class="container mt-4">
-        <h1>Threats List</h1>
-        <a href="{{ route('threats.create') }}" class="btn btn-primary mb-3">Create New Threat</a>
+    @foreach($groups as $group)
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>{{ $group->name }}</h3>
+            </div>
+            <div class="card-body">
+                @if($group->threats->isEmpty())
+                    <p>No threats in this group.</p>
+                @else
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($group->threats as $threat)
+                                <tr>
+                                    <td>{{ $threat->name }}</td>
+                                    <td>{{ $threat->description }}</td>
+                                    <td>
+                                        <!-- Edit and Delete Buttons -->
+                                        <a href="{{ route('threats.edit', $threat->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('threats.destroy', $threat->id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this threat?');">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
+    @endforeach
 
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Threat ID</th>
-                    <th>Threat Name</th>
-                    <th>Threat Description</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($threats as $threat)
-                    <tr>
-                        <td>{{ $threat->threat_id }}</td>
-                        <td>{{ $threat->threat_name }}</td>
-                        <td>{{ $threat->threat_description }}</td>
-                        <td>
-                            <a href="{{ route('admin.profile.threats.edit', $threat->threat_id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('admin.profile.threats.destroy', $threat->threat_id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <a href="{{ route('threat-groups.create') }}" class="btn btn-primary">Create New Threat Group</a>
+    <a href="{{ route('threats.create') }}" class="btn btn-secondary">Create New Threat</a>
+</div>
 @endsection

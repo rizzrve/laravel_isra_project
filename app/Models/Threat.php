@@ -9,8 +9,13 @@ class Threat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'threat_group_id'];
+    protected $fillable = [
+        'name',
+        'description',
+        'threat_group_id',
+    ];
 
+    // Define the relationship to ThreatGroup
     public function threatGroup()
     {
         return $this->belongsTo(ThreatGroup::class);
