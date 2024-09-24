@@ -4,7 +4,7 @@
 
 @section('content')
 
-@include('navbar.layout')
+
     <div class="container">
         <h1>Create New Threat</h1>
 

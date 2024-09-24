@@ -28,7 +28,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/admin/profile/threats">Threat</a></li>
-                    <li><a class="dropdown-item" href="#">Vulnerability</a></li>
+                    <li><a class="dropdown-item" href="/admin/profile/Vulnerability">Vulnerability</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -83,7 +83,7 @@
                     Risk Management
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Asset Register</a></li>
+                    <li><a class="dropdown-item" href="/user/asset_register">Asset Register</a></li>
                     <li><a class="dropdown-item" href="#">Risk Assessment</a></li>
                     <li><a class="dropdown-item" href="#">Risk Treatment Plan</a></li>
                 </ul>

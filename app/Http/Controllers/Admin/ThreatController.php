@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Threat;
 use App\Models\ThreatGroup;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
-class AdminThreatController extends Controller
+class ThreatController extends AdminThreatController
 {
     public function index()
     {
