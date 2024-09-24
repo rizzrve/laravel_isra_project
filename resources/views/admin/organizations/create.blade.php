@@ -13,10 +13,8 @@
                         <input class="form-control" type="text" id="org_name" name="org_name">
                     </div>
                     <div class="mb-3">
-                        <div class="mb-3">
-                            <label for="org_logo" class="form-label">Logo: </label>
-                            <input class="form-control" type="file" id="org_logo" name="org_logo">
-                        </div>
+                        <label for="org_logo" class="form-label">Logo: </label>
+                        <input class="form-control" type="file" id="org_logo" name="org_logo">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Create</button>

@@ -22,13 +22,8 @@
 
                                 @if ($org->org_logo)
                                     <div class="image-container">
-                                        <img class="rounded-circle" src="{{ asset($org->org_logo) }}"
-                                            alt="Organization Logo" width="100" id="logoImage">
-                                        <div class="overlay">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </div>
-                                        <input type="file" class="file-input" id="fileInput" accept="image/*"
-                                            onchange="uploadLogo(event)">
+                                        <img class="rounded-circle" src="{{ asset('storage/org_logo/' . $org->org_logo) }}"
+                                            alt="Organization Logo" width="100" id="org_logo">
                                     </div>
                                 @else
                                     <p>No logo uploaded</p>
@@ -61,62 +56,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .image-container {
-        position: relative;
-        display: inline-block;
-    }
-
-    .image-container img {
-        transition: opacity 0.3s ease;
-    }
-
-    .image-container:hover img {
-        opacity: 0.5;
-    }
-
-    .image-container .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .image-container:hover .overlay {
-        opacity: 1;
-    }
-
-    .image-container .overlay i {
-        font-size: 24px;
-        color: white;
-    }
-
-    .file-input {
-        display: none;
-    }
-</style>
-
-
-<script>
-    document.querySelector('.image-container').addEventListener('click', function() {
-        document.getElementById('fileInput').click();
-    });
-
-    function uploadLogo(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('logoImage').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-</script>

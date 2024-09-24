@@ -10,8 +10,7 @@
                     Organization
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/admin/Organization">Organization List</a></li>
-                    <li><a class="dropdown-item" href="/admin/test/organizations">Test Organization List</a></li>
+                    <li><a class="dropdown-item" href="/admin/test/organizations">Organization List</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
