@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+@include('navbar.layout')
 
 <div class="container">
     <h1>Create New Risk Assessment</h1>

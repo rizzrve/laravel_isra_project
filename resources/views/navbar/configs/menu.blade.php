@@ -35,7 +35,7 @@
                     Risk Management
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Risk Assessment</a></li>
+                    <li><a class="dropdown-item" href="/risk_assessments">Risk Assessment</a></li>
                     <li><a class="dropdown-item" href="#">Risk Treatment Plan</a></li>
                 </ul>
             </li>
@@ -83,7 +83,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/user/asset_register">Asset Register</a></li>
-                    <li><a class="dropdown-item" href="#">Risk Assessment</a></li>
+                    <li><a class="dropdown-item" href="/risk_assessments">Risk Assessment</a></li>
                     <li><a class="dropdown-item" href="#">Risk Treatment Plan</a></li>
                 </ul>
             </li>
