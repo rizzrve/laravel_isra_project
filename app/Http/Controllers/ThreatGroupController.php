@@ -9,7 +9,7 @@ class ThreatGroupController extends Controller
 {
     public function create()
     {
-        return view('user.profile.threats.groups.create');
+        return view('admin.threat-profile.groups.create');
     }
 
     public function store(Request $request)

@@ -10,7 +10,8 @@ class AdminThreatGroupController extends Controller
 {
     public function create()
     {
-        return view('admin.threat-profile.create');
+        $groups = ThreatGroup::all();
+        return view('admin.threat-profile.groups.create', compact('groups'));
     }
 
     public function store(Request $request)
