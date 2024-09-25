@@ -22,8 +22,8 @@
 
                                 @if ($org->org_logo)
                                     <div class="image-container">
-                                        <img class="rounded-circle" src="{{ asset('storage/org_logo/' . $org->org_logo) }}"
-                                            alt="Organization Logo" width="100" id="org_logo">
+                                        <img class="rounded-circle" src="{{ Storage::url($org->org_logo) }}"
+                                            width="100" id="org_logo">
                                     </div>
                                 @else
                                     <p>No logo uploaded</p>
