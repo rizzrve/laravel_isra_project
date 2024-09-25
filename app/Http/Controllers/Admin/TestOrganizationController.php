@@ -26,26 +26,41 @@ class TestOrganizationController extends Controller
     // ====================================
     public function create(Request $request)
     {
+        Log::info('Creating organization');
         try {
+            Log::info('Validating request');
             $validated = $request->validate([
                 'org_name' => 'required|string|max:255',
                 'org_logo' => 'nullable|image|max:2048',
             ]);
 
+            Log::info('Request validated', $validated);
+
             $organization = new Organization([
                 'org_name' => $validated['org_name'],
+<<<<<<< Updated upstream
+=======
+                'org_id' => random_int(10, 90), // Ensure org_id is set here
+>>>>>>> Stashed changes
             ]);
+
+            Log::info('Organization instance created', ['organization' => $organization]);
 
             if ($request->hasFile('org_logo')) {
                 $organization->org_logo = $request->file('org_logo')->store('org_logo', 'public');
+                Log::info('Organization logo stored', ['org_logo' => $organization->org_logo]);
             }
 
             $organization->save();
+            Log::info('Organization saved to database', ['organization' => $organization]);
 
             return redirect()->back()->with('success', 'Organization created successfully.');
-
         } catch (\Exception $e) {
+<<<<<<< Updated upstream
             Log::error($e->getMessage());
+=======
+            Log::error('Error occurred while creating organization', ['exception' => $e->getMessage()]);
+>>>>>>> Stashed changes
             return redirect()->back()->withErrors(['error' => 'An error occurred while creating the organization.']);
         }
     }

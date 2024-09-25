@@ -125,9 +125,6 @@ Route::prefix('user/profile/threats')->group(function() {
     Route::get('/groups/{group}/edit', [ThreatGroupController::class, 'edit'])->name('threat-groups.edit');
     Route::put('/groups/{group}', [ThreatGroupController::class, 'update'])->name('threat-groups.update');
     Route::delete('/groups/{group}', [ThreatGroupController::class, 'destroy'])->name('threat-groups.destroy');
-
-
-
 });
 
 use App\Http\Controllers\VulnerabilityController;
@@ -156,7 +153,10 @@ Route::post('/admin/test/organizations', [TestOrganizationController::class, 'cr
 Route::patch('/admin/test/organizations/{id}/update', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 use App\Http\Controllers\AssetRegisterController;
 
 Route::prefix('user/asset_register')->group(function () {
