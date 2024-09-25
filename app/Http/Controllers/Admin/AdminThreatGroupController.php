@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ThreatGroup;
 use Illuminate\Http\Request;
+use App\Models\ThreatGroup;
 
 class AdminThreatGroupController extends Controller
 {
     public function create()
     {
-        return view('admin.profile.threats.groups.create');
+        return view('admin.threat-profile.create');
     }
 
     public function store(Request $request)
@@ -23,7 +23,7 @@ class AdminThreatGroupController extends Controller
     public function edit($id)
     {
         $group = ThreatGroup::findOrFail($id);
-        return view('admin.profile.threats.groups.edit', compact('group'));
+        return view('admin.threat-profile.edit', compact('group'));
     }
 
     public function update(Request $request, $id)

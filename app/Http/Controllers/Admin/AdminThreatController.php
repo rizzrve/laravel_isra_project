@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Threat;
 use App\Models\ThreatGroup;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class AdminThreatController extends Controller
 {
     public function index()
     {
         $groups = ThreatGroup::with('threats')->get();
-        return view('admin.profile.threats.index', compact('groups'));
+        $groupies = ThreatGroup::all();
+        return view('admin.threat-profile.index', compact('groups', 'groupies'));
     }
 
     public function create()
     {
         $groups = ThreatGroup::all();
-        return view('admin.profile.threats.create', compact('groups'));
+        return view('admin.threat-profile.create', compact('groups'));
     }
 
     public function store(Request $request)
@@ -30,14 +31,14 @@ class AdminThreatController extends Controller
         ]);
 
         Threat::create($request->all());
-        return redirect()->route('threats.index')->with('success', 'Threat created successfully.');
+        return redirect()->route('threat-groups.index')->with('success', 'Threat created successfully.');
     }
 
     public function edit($id)
     {
         $threat = Threat::findOrFail($id);
         $groups = ThreatGroup::all();
-        return view('admin.profile.threats.edit', compact('threat', 'groups'));
+        return view('admin.threat-profile.edit', compact('threat', 'groups'));
     }
 
     public function update(Request $request, $id)
@@ -50,13 +51,19 @@ class AdminThreatController extends Controller
 
         $threat = Threat::findOrFail($id);
         $threat->update($request->all());
-        return redirect()->route('threats.index')->with('success', 'Threat updated successfully.');
+        return redirect()->route('threat-groups.index')->with('success', 'Threat updated successfully.');
     }
 
     public function destroy($id)
     {
         $threat = Threat::findOrFail($id);
         $threat->delete();
-        return redirect()->route('threats.index')->with('success', 'Threat deleted successfully.');
+        return redirect()->route('threat-groups.index')->with('success', 'Threat deleted successfully.');
+    }
+
+    public function getThreatsByGroup($groupId)
+    {
+        $threats = Threat::where('threat_group_id', $groupId)->get();
+        return view('partials.threats', compact('threats')); 
     }
 }

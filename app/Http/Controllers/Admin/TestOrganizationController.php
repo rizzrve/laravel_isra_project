@@ -38,10 +38,7 @@ class TestOrganizationController extends Controller
 
             $organization = new Organization([
                 'org_name' => $validated['org_name'],
-<<<<<<< Updated upstream
-=======
                 'org_id' => random_int(10, 90), // Ensure org_id is set here
->>>>>>> Stashed changes
             ]);
 
             Log::info('Organization instance created', ['organization' => $organization]);
@@ -56,11 +53,7 @@ class TestOrganizationController extends Controller
 
             return redirect()->back()->with('success', 'Organization created successfully.');
         } catch (\Exception $e) {
-<<<<<<< Updated upstream
-            Log::error($e->getMessage());
-=======
             Log::error('Error occurred while creating organization', ['exception' => $e->getMessage()]);
->>>>>>> Stashed changes
             return redirect()->back()->withErrors(['error' => 'An error occurred while creating the organization.']);
         }
     }

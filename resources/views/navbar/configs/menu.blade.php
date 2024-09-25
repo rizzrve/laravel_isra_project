@@ -3,6 +3,7 @@
 </button>
 
 @if (Request::is('admin/*') || Request::is('admin'))
+    {{-- ADMIN --}}
     <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -26,8 +27,8 @@
                     Profile
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/user/profile/threats">Threat</a></li>
-                    <li><a class="dropdown-item" href="/user/profile/Vulnerability">Vulnerability</a></li>
+                    <li><a class="dropdown-item" href="/admin/profile/threats">Threat</a></li>
+                    <li><a class="dropdown-item" href="/admin/profile/vulnerabilities">Vulnerability</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -75,6 +76,7 @@
         </div>
     </div>
 @elseif (Request::is('user/*') || Request::is('user'))
+    {{-- USER --}}
     <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
@@ -124,6 +126,7 @@
     </div>
 @else
     @if (Request::is('/') || Request::is(''))
+        {{-- PUBLIC --}}
         <div class="d-flex">
             <button class="btn btn-dark" onclick="window.location.href='/login'">Login</button>
             <button class="btn btn-dark" onclick="window.location.href='/register'">register</button>
