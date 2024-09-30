@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Barryvdh\Debugbar\Facades\Debugbar;
-use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image;
 
 class TestOrganizationController extends Controller
 {
@@ -16,7 +14,6 @@ class TestOrganizationController extends Controller
     // ====================================
     public function view()
     {
-        Debugbar::info('Organizations View');
         $organizations = Organization::all();
         return view('admin.organizations.main', compact('organizations'));
     }
@@ -26,34 +23,34 @@ class TestOrganizationController extends Controller
     // ====================================
     public function create(Request $request)
     {
-        Log::info('Creating organization');
         try {
-            Log::info('Validating request');
             $validated = $request->validate([
                 'org_name' => 'required|string|max:255',
-                'org_logo' => 'nullable|image|max:2048',
+                'org_logo' => 'nullable|image',
             ]);
 
-            Log::info('Request validated', $validated);
 
             $organization = new Organization([
                 'org_name' => $validated['org_name'],
-                'org_id' => random_int(10, 90), // Ensure org_id is set here
+                'org_id' => random_int(10, 90),
             ]);
 
-            Log::info('Organization instance created', ['organization' => $organization]);
 
             if ($request->hasFile('org_logo')) {
-                $organization->org_logo = $request->file('org_logo')->store('org_logo', 'public');
-                Log::info('Organization logo stored', ['org_logo' => $organization->org_logo]);
+                // $organization->org_logo = $request->file('org_logo')->store('org_logo', 'public');
+                $image = $request->file('org_logo');
+                $path = $image->store('org_logo', 'public');
+
+                $this->resizeAndCropImage(storage_path('app/public/' . $path), 500, 500);
+
+                $organization->org_logo = $path;
             }
 
             $organization->save();
-            Log::info('Organization saved to database', ['organization' => $organization]);
 
             return redirect()->back()->with('success', 'Organization created successfully.');
         } catch (\Exception $e) {
-            Log::error('Error occurred while creating organization', ['exception' => $e->getMessage()]);
+
             return redirect()->back()->withErrors(['error' => 'An error occurred while creating the organization.']);
         }
     }
@@ -82,11 +79,38 @@ class TestOrganizationController extends Controller
         return redirect()->back()->with('success', 'Organization updated successfully.');
     }
 
+    // ====================================
+    // FUNCTION DEPENDENCIES
+    // ====================================
+
+    // ------------------------------------
+    // Handle image upload to storage and return the path
+    // ------------------------------------
     private function handleImageUpload(Request $request, $fieldName)
     {
         if ($request->hasFile($fieldName)) {
             return $request->file($fieldName)->store('org_logo', 'public');
         }
         return null;
+    }
+
+    // ------------------------------------
+    // Resize and crop the image to a 1:1 aspect ratio
+    // ------------------------------------
+    private function resizeAndCropImage($filePath, $width, $height)
+    {
+        list($originalWidth, $originalHeight) = getimagesize($filePath);
+        $src = imagecreatefromstring(file_get_contents($filePath));
+
+        $minSize = min($originalWidth, $originalHeight);
+        $srcX = ($originalWidth - $minSize) / 2;
+        $srcY = ($originalHeight - $minSize) / 2;
+
+        $dst = imagecreatetruecolor($width, $height);
+        imagecopyresampled($dst, $src, 0, 0, $srcX, $srcY, $width, $height, $minSize, $minSize);
+
+        imagejpeg($dst, $filePath);
+        imagedestroy($src);
+        imagedestroy($dst);
     }
 }
