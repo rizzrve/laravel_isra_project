@@ -19,14 +19,15 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Asset Id</th>
                 <th>Asset</th>
+                <th>Confidentiality</th>
+                <th>Integrity</th>
+                <th>Availability</th>
                 <th>Threat Group</th>
                 <th>Threat</th>
                 <th>Vulnerability Group</th>
                 <th>Vulnerability</th>
-                <th>Confidentiality</th>
-                <th>Integrity</th>
-                <th>Availability</th>
                 <th>Personnel</th>
                 <th>Start Time</th>
                 <th>End Time</th>
@@ -48,14 +49,15 @@
                 @foreach($riskAssessments as $riskAssessment)
                     <tr>
                         <td>{{ $riskAssessment->id }}</td>
+                        <td>{{$riskAssessment->asset_id}}</td>
                         <td>{{ $riskAssessment->asset->asset_name }}</td>
+                        <td>{{ $riskAssessment->confidentiality }}</td>
+                        <td>{{ $riskAssessment->integrity }}</td>
+                        <td>{{ $riskAssessment->availability }}</td>
                         <td>{{ $riskAssessment->threatGroup->name ?? 'N/A' }}</td>
                         <td>{{ $riskAssessment->threat->name ?? 'N/A' }}</td>
                         <td>{{ $riskAssessment->vulnerabilityGroup->name ?? 'N/A' }}</td>
                         <td>{{ $riskAssessment->vulnerability->name ?? 'N/A' }}</td>
-                        <td>{{ $riskAssessment->confidentiality }}</td>
-                        <td>{{ $riskAssessment->integrity }}</td>
-                        <td>{{ $riskAssessment->availability }}</td>
                         <td>{{ $riskAssessment->personnel }}</td>
                         <td>{{ $riskAssessment->start_time }}</td>
                         <td>{{ $riskAssessment->end_time }}</td>

@@ -31,13 +31,13 @@ class RiskAssessment extends Model
 
     public function asset()
     {
-        return $this->belongsTo(AssetRegister::class, 'asset_id'); // Correct model name here
+        return $this->belongsTo(AssetRegister::class, 'asset_id');
     }
 
     public function threatGroup()
-    {
-        return $this->belongsTo(ThreatGroup::class, 'threat_group_id');
-    }
+{
+    return $this->belongsTo(ThreatGroup::class, 'threat_group_id');
+}
 
     public function threat()
     {
@@ -45,14 +45,12 @@ class RiskAssessment extends Model
     }
 
     public function vulnerabilityGroup()
-    {
-        return $this->belongsTo(VulnerabilityGroup::class, 'vulnerability_group_id');
-    }
+{
+    return $this->belongsTo(VulnerabilityGroup::class, 'vulnerability_group_id');
+}
 
     public function vulnerability()
     {
         return $this->belongsTo(Vulnerability::class, 'vulnerability_id');
     }
 }
-
-

@@ -1,21 +1,23 @@
 @extends('base.layout')
 
+@section('title', 'Create Risk Assessment')
+
 @section('content')
-
-
-
+@include('navbar.layout')
 <div class="container">
     <h1>Edit Risk Assessment</h1>
 
     <form action="{{ route('risk_assessments.update', $riskAssessment->id) }}" method="POST">
         @csrf
         @method('PUT')
-        
+
         <div class="form-group">
             <label for="asset_id">Asset</label>
             <select name="asset_id" id="asset_id" class="form-control" required>
                 @foreach($assets as $asset)
-                    <option value="{{ $asset->asset_id }}" {{ $riskAssessment->asset_id == $asset->asset_id ? 'selected' : '' }}>{{ $asset->asset_name }}</option>
+                    <option value="{{ $asset->id }}" {{ $asset->id == $riskAssessment->asset_id ? 'selected' : '' }}>
+                        {{ $asset->name }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -24,7 +26,9 @@
             <label for="threat_group_id">Threat Group</label>
             <select name="threat_group_id" id="threat_group_id" class="form-control" required>
                 @foreach($threatGroups as $group)
-                    <option value="{{ $group->id }}" {{ $riskAssessment->threat_group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
+                    <option value="{{ $group->id }}" {{ $group->id == $riskAssessment->threat_group_id ? 'selected' : '' }}>
+                        {{ $group->name }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -32,8 +36,15 @@
         <div class="form-group">
             <label for="threat_id">Threat</label>
             <select name="threat_id" id="threat_id" class="form-control" required>
-                <option value="">Select Threat</option>
-                <!-- JavaScript will populate this based on the selected group -->
+                @if($riskAssessment->threatGroup)
+                    @foreach($riskAssessment->threatGroup->threats as $threat)
+                        <option value="{{ $threat->id }}" {{ $threat->id == $riskAssessment->threat_id ? 'selected' : '' }}>
+                            {{ $threat->name }}
+                        </option>
+                    @endforeach
+                @else
+                    <option value="">No threats available</option>
+                @endif
             </select>
         </div>
 
@@ -41,7 +52,9 @@
             <label for="vulnerability_group_id">Vulnerability Group</label>
             <select name="vulnerability_group_id" id="vulnerability_group_id" class="form-control" required>
                 @foreach($vulnerabilityGroups as $group)
-                    <option value="{{ $group->id }}" {{ $riskAssessment->vulnerability_group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
+                    <option value="{{ $group->id }}" {{ $group->id == $riskAssessment->vulnerability_group_id ? 'selected' : '' }}>
+                        {{ $group->name }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -49,39 +62,46 @@
         <div class="form-group">
             <label for="vulnerability_id">Vulnerability</label>
             <select name="vulnerability_id" id="vulnerability_id" class="form-control" required>
-                <option value="">Select Vulnerability</option>
-                <!-- JavaScript will populate this based on the selected group -->
+                @if($riskAssessment->vulnerabilityGroup)
+                    @foreach($riskAssessment->vulnerabilityGroup->vulnerabilities as $vulnerability)
+                        <option value="{{ $vulnerability->id }}" {{ $vulnerability->id == $riskAssessment->vulnerability_id ? 'selected' : '' }}>
+                            {{ $vulnerability->name }}
+                        </option>
+                    @endforeach
+                @else
+                    <option value="">No vulnerabilities available</option>
+                @endif
             </select>
         </div>
 
         <div class="form-group">
             <label for="confidentiality">Confidentiality</label>
-            <input type="number" name="confidentiality" class="form-control" value="{{ $riskAssessment->confidentiality }}" required>
+            <input type="number" class="form-control" name="confidentiality" value="{{ old('confidentiality', $riskAssessment->confidentiality) }}" required>
         </div>
 
         <div class="form-group">
             <label for="integrity">Integrity</label>
-            <input type="number" name="integrity" class="form-control" value="{{ $riskAssessment->integrity }}" required>
+            <input type="number" class="form-control" name="integrity" value="{{ old('integrity', $riskAssessment->integrity) }}" required>
         </div>
 
         <div class="form-group">
             <label for="availability">Availability</label>
-            <input type="number" name="availability" class="form-control" value="{{ $riskAssessment->availability }}" required>
+            <input type="number" class="form-control" name="availability" value="{{ old('availability', $riskAssessment->availability) }}" required>
         </div>
 
         <div class="form-group">
             <label for="personnel">Personnel</label>
-            <input type="text" name="personnel" class="form-control" value="{{ $riskAssessment->personnel }}" required>
+            <input type="text" class="form-control" name="personnel" value="{{ old('personnel', $riskAssessment->personnel) }}" required>
         </div>
 
         <div class="form-group">
             <label for="start_time">Start Time</label>
-            <input type="datetime-local" name="start_time" class="form-control" value="{{ $riskAssessment->start_time }}" required>
+            <input type="date" class="form-control" name="start_time" value="{{ old('start_time', $riskAssessment->start_time) }}" required>
         </div>
 
         <div class="form-group">
             <label for="end_time">End Time</label>
-            <input type="datetime-local" name="end_time" class="form-control" value="{{ $riskAssessment->end_time }}">
+            <input type="date" class="form-control" name="end_time" value="{{ old('end_time', $riskAssessment->end_time) }}">
         </div>
 
         <div class="form-group">
@@ -113,56 +133,64 @@
 
         <div class="form-group">
             <label for="risk_owner">Risk Owner</label>
-            <input type="text" name="risk_owner" class="form-control" value="{{ $riskAssessment->risk_owner }}" required>
+            <input type="text" class="form-control" name="risk_owner" value="{{ old('risk_owner', $riskAssessment->risk_owner) }}" required>
         </div>
 
         <div class="form-group">
             <label for="mitigation_option">Mitigation Option</label>
-            <textarea name="mitigation_option" class="form-control" required>{{ $riskAssessment->mitigation_option }}</textarea>
+            <textarea class="form-control" name="mitigation_option" required>{{ old('mitigation_option', $riskAssessment->mitigation_option) }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="treatment">Treatment</label>
-            <textarea name="treatment" class="form-control">{{ $riskAssessment->treatment }}</textarea>
+            <textarea class="form-control" name="treatment">{{ old('treatment', $riskAssessment->treatment) }}</textarea>
         </div>
 
+       
         <button type="submit" class="btn btn-primary">Update Risk Assessment</button>
     </form>
 </div>
 
+@section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-// JavaScript to populate threats and vulnerabilities based on selected groups
-document.getElementById('threat_group_id').addEventListener('change', function() {
-    const groupId = this.value;
-    fetch(`/api/threats/group/${groupId}`)
-        .then(response => response.json())
-        .then(data => {
-            const threatSelect = document.getElementById('threat_id');
-            threatSelect.innerHTML = '';
-            data.forEach(threat => {
-                const option = document.createElement('option');
-                option.value = threat.id;
-                option.textContent = threat.name;
-                threatSelect.appendChild(option);
+    $(document).ready(function() {
+        // Change event for threat group
+        $('#threat_group_id').change(function() {
+            var groupId = $(this).val();
+            $.ajax({
+                url: '/get-threats/' + groupId,
+                method: 'GET',
+                success: function(data) {
+                    $('#threat_id').empty();
+                    $.each(data, function(index, threat) {
+                        $('#threat_id').append('<option value="' + threat.id + '">' + threat.name + '</option>');
+                    });
+                },
+                error: function() {
+                    alert('Could not load threats. Please try again.');
+                }
             });
         });
-});
 
-document.getElementById('vulnerability_group_id').addEventListener('change', function() {
-    const groupId = this.value;
-    fetch(`/api/vulnerabilities/group/${groupId}`)
-        .then(response => response.json())
-        .then(data => {
-            const vulnerabilitySelect = document.getElementById('vulnerability_id');
-            vulnerabilitySelect.innerHTML = '';
-            data.forEach(vulnerability => {
-                const option = document.createElement('option');
-                option.value = vulnerability.id;
-                option.textContent = vulnerability.name;
-                vulnerabilitySelect.appendChild(option);
+        // Change event for vulnerability group
+        $('#vulnerability_group_id').change(function() {
+            var groupId = $(this).val();
+            $.ajax({
+                url: '/get-vulnerabilities/' + groupId,
+                method: 'GET',
+                success: function(data) {
+                    $('#vulnerability_id').empty();
+                    $.each(data, function(index, vulnerability) {
+                        $('#vulnerability_id').append('<option value="' + vulnerability.id + '">' + vulnerability.name + '</option>');
+                    });
+                },
+                error: function() {
+                    alert('Could not load vulnerabilities. Please try again.');
+                }
             });
         });
-});
+    });
 </script>
-
+@endsection
 @endsection

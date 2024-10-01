@@ -15,7 +15,6 @@ class Threat extends Model
         'threat_group_id',
     ];
 
-    // Define the relationship to ThreatGroup
     public function threatGroup()
     {
         return $this->belongsTo(ThreatGroup::class);

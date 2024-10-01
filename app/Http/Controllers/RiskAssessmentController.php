@@ -7,27 +7,28 @@ use App\Models\AssetRegister;
 use App\Models\Vulnerability;
 use App\Models\Threat;
 use App\Models\ThreatGroup;
-use App\Models\VulnerabilityGroup; // Ensure this is imported
+use App\Models\VulnerabilityGroup;
 use Illuminate\Http\Request;
 
 class RiskAssessmentController extends Controller
 {
     // Display all risk assessments
     public function index()
-{
-    $riskAssessments = RiskAssessment::with(['threatGroup', 'threat', 'vulnerabilityGroup', 'vulnerability'])
-        ->paginate(10); // Use pagination
+    {
+        $riskAssessments = RiskAssessment::with(['threatGroup', 'threat', 'vulnerabilityGroup', 'vulnerability'])
+            ->paginate(10);
 
-    return view('risk_assessments.index', compact('riskAssessments'));
-}
+        return view('risk_assessments.index', compact('riskAssessments'));
+    }
 
     // Show create form
     public function create()
     {
-        $assets = AssetRegister::all(); // Get all assets
-        $threatGroups = ThreatGroup::all(); // Get all threat groups
-        $vulnerabilityGroups = VulnerabilityGroup::all(); // Get all vulnerability groups
-        return view('risk_assessments.create', compact('assets', 'threatGroups', 'vulnerabilityGroups'));
+        $assets = AssetRegister::all();
+        $vulnerabilityGroups = VulnerabilityGroup::with('vulnerabilities')->get();
+        $threatGroups = ThreatGroup::with('threats')->get();
+        
+        return view('risk_assessments.create', compact('assets', 'vulnerabilityGroups', 'threatGroups'));
     }
 
     // Store new risk assessment
@@ -54,21 +55,23 @@ class RiskAssessmentController extends Controller
         ]);
 
         RiskAssessment::create($validated);
-        return redirect()->route('risk_assessments.index')->with('success', 'Risk assessment created successfully!');
+        return redirect()->route('risk_assessments.index')->with('success', 'Risk Assessment created successfully.');
     }
 
     // Show edit form
-    public function edit(RiskAssessment $riskAssessment)
-    {
-        $assets = AssetRegister::all();
-        $threatGroups = ThreatGroup::all();
-        $vulnerabilityGroups = VulnerabilityGroup::all();
-
-        return view('risk_assessments.edit', compact('riskAssessment', 'assets', 'threatGroups', 'vulnerabilityGroups'));
-    }
+    public function edit($id)
+{
+    // Eager load related models
+    $riskAssessment = RiskAssessment::with(['threatGroup.threats', 'vulnerabilityGroup.vulnerabilities'])->findOrFail($id);
+    $assets = AssetRegister::all();
+    $vulnerabilityGroups = VulnerabilityGroup::with('vulnerabilities')->get();
+    $threatGroups = ThreatGroup::with('threats')->get();
+    
+    return view('risk_assessments.edit', compact('riskAssessment', 'assets', 'vulnerabilityGroups', 'threatGroups'));
+}
 
     // Update risk assessment
-    public function update(Request $request, RiskAssessment $riskAssessment)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'asset_id' => 'required|exists:asset_register,asset_id',
@@ -90,14 +93,17 @@ class RiskAssessmentController extends Controller
             'treatment' => 'nullable|string',
         ]);
 
+        $riskAssessment = RiskAssessment::findOrFail($id);
         $riskAssessment->update($validated);
-        return redirect()->route('risk_assessments.index')->with('success', 'Risk assessment updated successfully!');
+
+        return redirect()->route('risk_assessments.index')->with('success', 'Risk Assessment updated successfully.');
     }
 
     // Delete risk assessment
-    public function destroy(RiskAssessment $riskAssessment)
+    public function destroy($id)
     {
+        $riskAssessment = RiskAssessment::findOrFail($id);
         $riskAssessment->delete();
-        return redirect()->route('risk_assessments.index')->with('success', 'Risk assessment deleted successfully!');
+        return redirect()->route('risk_assessments.index')->with('success', 'Risk Assessment deleted successfully.');
     }
 }
