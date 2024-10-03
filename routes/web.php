@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
 use App\Http\Controllers\Admin\ProjectController;
 
 Route::get('/admin/projects', [ProjectController::class, 'view'])->name('admin.projects');
-Route::post('/admin/projects', [ProjectController::class, 'create'])->name('admin.projects.create');
+Route::post('/admin/projects/create', [ProjectController::class, 'create'])->name('admin.projects.create');
 Route::patch('/admin/projects/{id}/update', [ProjectController::class, 'update'])->name('admin.projects.update');
 
 
@@ -158,7 +158,7 @@ Route::prefix('/admin/rtp')->group(function () {
     Route::get('/', [RTPController::class, 'view'])->name('rtp');
     // Route::post('', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
     // Route::patch('', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
-});
+});;
 
 use App\Http\Controllers\AssetRegisterController;
 
@@ -175,6 +175,7 @@ use App\Http\Controllers\Admin\AdminThreatGroupController;
 use App\Http\Controllers\Admin\AdminThreatController;
 
 Route::prefix('admin/profile/threats/')->group(function () {
+    Route::get('/view', [AdminThreatController::class, 'newView'])->name('threats.view');
     Route::get('/', [AdminThreatController::class, 'index'])->name('threats.index');
     Route::get('/create', [AdminThreatController::class, 'create'])->name('threats.create');
     Route::post('/', [AdminThreatController::class, 'store'])->name('threats.store');
