@@ -59,9 +59,15 @@ class ThreatController extends Controller
         return redirect()->route('threats.index')->with('success', 'Threat deleted successfully.');
     }
     public function getThreatsByGroup($groupId)
-{
-    $threats = Threat::where('threat_group_id', $groupId)->get();
-    return response()->json(['threats' => $threats]);
-}
+    {
+        $threats = Threat::where('threat_group_id', $groupId)->get();
+        $options = '<option value="">Select Threat</option>';
+        foreach ($threats as $threat) {
+            $options .= '<option value="' . $threat->id . '">' . $threat->name . '</option>';
+        }
+        return $options;
+    }
+    
 
 }
+vc     

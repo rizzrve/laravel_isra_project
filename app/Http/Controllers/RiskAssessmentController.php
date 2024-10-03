@@ -106,4 +106,31 @@ class RiskAssessmentController extends Controller
         $riskAssessment->delete();
         return redirect()->route('risk_assessments.index')->with('success', 'Risk Assessment deleted successfully.');
     }
+
+    public function edit($id)
+{
+    // Load the existing risk assessment
+    $riskAssessment = RiskAssessment::with('threatGroup', 'threat', 'vulnerabilityGroup', 'vulnerability')
+        ->findOrFail($id);
+
+    // Load all assets, threat groups, and vulnerability groups
+    $assets = AssetRegister::all();
+    $threatGroups = ThreatGroup::with('threats')->get();  // Load threat groups with threats
+    $vulnerabilityGroups = VulnerabilityGroup::with('vulnerabilities')->get();  // Load vulnerability groups with vulnerabilities
+
+    return view('risk_assessments.edit', compact('riskAssessment', 'assets', 'threatGroups', 'vulnerabilityGroups'));
+}
+
+
+    public function getThreatsByGroup($groupId)
+    {
+        $threats = Threat::where('threat_group_id', $groupId)->get();
+        return view('partials.threats', compact('threats'));
+    }
+    
+    public function getVulnerabilitiesByGroup($groupId)
+    {
+        $vulnerabilities = Vulnerability::where('vulnerability_group_id', $groupId)->get();
+        return view('partials.vulnerabilities', compact('vulnerabilities'));
+    }
 }

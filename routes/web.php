@@ -226,3 +226,9 @@ Route::get('/api/threats/{groupId}', [ThreatController::class, 'getThreatsByGrou
 
 Route::resource('risk_assessments', RiskAssessmentController::class);
 
+Route::get('get-threats-by-group/{groupId}', [ThreatController::class, 'getThreatsByGroup']);
+Route::get('get-vulnerabilities-by-group/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup']);
+
+
+
+

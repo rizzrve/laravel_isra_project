@@ -29,7 +29,12 @@ class CreateRiskAssessmentsTable extends Migration
             $table->text('treatment')->nullable();
             $table->timestamps();
 
+            // Foreign key constraints
             $table->foreign('asset_id')->references('asset_id')->on('asset_register')->onDelete('cascade');
+            $table->foreign('threat_group_id')->references('id')->on('threat_groups')->onDelete('set null');
+            $table->foreign('threat_id')->references('id')->on('threats')->onDelete('set null');
+            $table->foreign('vulnerability_group_id')->references('id')->on('vulnerability_groups')->onDelete('set null');
+            $table->foreign('vulnerability_id')->references('id')->on('vulnerabilities')->onDelete('set null');
         });
     }
 
