@@ -70,4 +70,3 @@ class ThreatController extends Controller
     
 
 }
-vc     

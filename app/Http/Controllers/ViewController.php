@@ -70,8 +70,8 @@ class ViewController extends Controller
     {
         return view('landing');
     }
-}
-public function getVulnerabilitiesByGroup($groupId)
+
+    public function getVulnerabilitiesByGroup($groupId)
 {
     $vulnerabilities = Vulnerability::where('vulnerability_group_id', $groupId)->get();
     $options = '<option value="">Select Vulnerability</option>';
@@ -79,4 +79,6 @@ public function getVulnerabilitiesByGroup($groupId)
         $options .= '<option value="' . $vulnerability->id . '">' . $vulnerability->name . '</option>';
     }
     return $options;
+}
+
 }

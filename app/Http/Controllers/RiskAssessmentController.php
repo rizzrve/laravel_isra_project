@@ -58,17 +58,6 @@ class RiskAssessmentController extends Controller
         return redirect()->route('risk_assessments.index')->with('success', 'Risk Assessment created successfully.');
     }
 
-    // Show edit form
-    public function edit($id)
-{
-    // Eager load related models
-    $riskAssessment = RiskAssessment::with(['threatGroup.threats', 'vulnerabilityGroup.vulnerabilities'])->findOrFail($id);
-    $assets = AssetRegister::all();
-    $vulnerabilityGroups = VulnerabilityGroup::with('vulnerabilities')->get();
-    $threatGroups = ThreatGroup::with('threats')->get();
-    
-    return view('risk_assessments.edit', compact('riskAssessment', 'assets', 'vulnerabilityGroups', 'threatGroups'));
-}
 
     // Update risk assessment
     public function update(Request $request, $id)

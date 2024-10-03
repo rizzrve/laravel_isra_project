@@ -18,7 +18,6 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Asset</th>
                 <th>Threat Group</th>
                 <th>Threat</th>
@@ -47,7 +46,6 @@
             @else
                 @foreach($riskAssessments as $riskAssessment)
                     <tr>
-                        <td>{{ $riskAssessment->id }}</td>
                         <td>{{ $riskAssessment->asset->asset_name }}</td>
                         <td>{{ $riskAssessment->threatGroup->name ?? 'N/A' }}</td>
                         <td>{{ $riskAssessment->threat->name ?? 'N/A' }}</td>
