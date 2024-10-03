@@ -9,10 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('/icons/fontawesome-free-6.6.0-web/css/all.min.css') }}">
+
 </head>
 
 <body>
     @yield('content')
+
+    <footer class="text-center py-3 mt-4">
+        <p>&copy; ISRA by Diaspora Sdn Bhd. All rights reserved.</p>
+    </footer>
+
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->

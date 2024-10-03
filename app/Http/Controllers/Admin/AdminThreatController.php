@@ -9,6 +9,12 @@ use App\Models\ThreatGroup;
 
 class AdminThreatController extends Controller
 {
+    public function newView()
+    {
+        $groups = ThreatGroup::with('threats')->get();
+        $groupies = ThreatGroup::all();
+        return view('admin.tthreat-profile.index', compact('groups', 'groupies'));
+    }
     public function index()
     {
         $groups = ThreatGroup::with('threats')->get();
@@ -58,12 +64,12 @@ class AdminThreatController extends Controller
     {
         $threat = Threat::findOrFail($id);
         $threat->delete();
-        return redirect()->route('threats.index')->with('success', 'Threat deleted successfully.');
+        return redirect()->route('threats.view')->with('success', 'Threat deleted successfully.');
     }
 
     public function getThreatsByGroup($groupId)
     {
         $threats = Threat::where('threat_group_id', $groupId)->get();
-        return view('partials.threats', compact('threats')); 
+        return view('partials.threats', compact('threats'));
     }
 }
