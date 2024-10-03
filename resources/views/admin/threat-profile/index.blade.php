@@ -1,7 +1,6 @@
 @extends('base.layout')
 
 @section('title', 'Create Vulnerability')
-
 @section('content')
 
     @include('navbar.layout')
@@ -34,8 +33,7 @@
                                             <!-- Edit and Delete Buttons -->
                                             <a href="{{ route('threats.edit', $threat->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('threats.destroy', $threat->id) }}" method="POST"
-                                                style="display:inline-block;">
+                                            <form action="{{ route('threats.destroy', $threat->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"
