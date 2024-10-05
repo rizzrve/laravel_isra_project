@@ -222,3 +222,14 @@ Route::get('/vulnerabilities/group/{groupId}', [VulnerabilityController::class, 
 
 Route::get('/threats/{groupId}', [ThreatController::class, 'getThreatsByGroup']);
 Route::get('/vulnerabilities/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup']);
+Route::get('/api/vulnerabilities/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup']);
+Route::get('/api/threats/{groupId}', [ThreatController::class, 'getThreatsByGroup']);
+
+Route::resource('risk_assessments', RiskAssessmentController::class);
+
+Route::get('get-threats-by-group/{groupId}', [ThreatController::class, 'getThreatsByGroup']);
+Route::get('get-vulnerabilities-by-group/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup']);
+
+
+
+

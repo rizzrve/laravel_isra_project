@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AssetRegister;
+use App\Models\RiskAssessment; // Import RiskAssessment model
 use Illuminate\Http\Request;
 
 class AssetRegisterController extends Controller
@@ -33,7 +34,27 @@ class AssetRegisterController extends Controller
             'asset_location' => 'nullable|string|max:255',
         ]);
 
-        AssetRegister::create($validated);
+        // Create the asset
+        $asset = AssetRegister::create($validated);
+
+        // Automatically create a risk assessment for the new asset
+        RiskAssessment::create([
+            'asset_id' => $asset->asset_id,
+            'threat_group_id' => null, // Set these values according to your logic
+            'threat_id' => null,
+            'vulnerability_group_id' => null,
+            'vulnerability_id' => null,
+            'confidentiality' => 0, // Default values, modify as necessary
+            'integrity' => 0,
+            'availability' => 0,
+            'personnel' => 'N/A', // Modify as necessary
+            'start_time' => now(),
+            'likelihood' => 'Low', // Default value
+            'impact' => 'Low', // Default value
+            'risk_level' => 'Acceptable', // Default value
+            'risk_owner' => $validated['asset_owner'], // Example usage
+            'mitigation_option' => 'None', // Default value
+        ]);
 
         return redirect()->route('assets.index')->with('success', 'Asset added successfully');
     }
