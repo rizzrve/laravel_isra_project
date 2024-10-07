@@ -37,7 +37,7 @@ class AdminThreatController extends Controller
         ]);
 
         Threat::create($request->all());
-        return redirect()->route('threats.index')->with('success', 'Threat created successfully.');
+        return redirect()->route('threats.view')->with('success', 'Threat created successfully.');
     }
 
     public function edit($id)

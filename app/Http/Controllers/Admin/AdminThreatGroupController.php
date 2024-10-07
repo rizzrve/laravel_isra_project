@@ -18,7 +18,7 @@ class AdminThreatGroupController extends Controller
     {
         $request->validate(['name' => 'required']);
         ThreatGroup::create($request->all());
-        return redirect()->route('threats.index')->with('success', 'Threat Group created successfully.');
+        return redirect()->route('threats.view')->with('success', 'Threat Group created successfully.');
     }
 
     public function edit($id)
@@ -39,6 +39,6 @@ class AdminThreatGroupController extends Controller
     {
         $group = ThreatGroup::findOrFail($id);
         $group->delete();
-        return redirect()->route('threats.index')->with('success', 'Threat Group deleted successfully.');
+        return redirect()->route('threats.view')->with('success', 'Threat Group deleted successfully.');
     }
 }

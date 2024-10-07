@@ -51,12 +51,8 @@
             </div>
         @endforeach
 
-        @if ($groupies->isEmpty())
-            <a href="{{ route('threat-groups.create') }}" class="btn btn-primary">Create New Threat Group</a>
-        @else
-            <a href="{{ route('threat-groups.create') }}" class="btn btn-primary">Create New Threat Group</a>
-            <a href="{{ route('threats.create') }}" class="btn btn-secondary">Create New Threat</a>
-        @endif
+        <a href="{{ route('threat-groups.create') }}" class="btn btn-primary">Create New Threat Group</a>
+        <a href="{{ route('threats.create') }}" class="btn btn-secondary">Create New Threat</a>
 
     </div>
 @endsection
