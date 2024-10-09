@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Threat;
 use App\Models\ThreatGroup;
-use Illuminate\Support\Facades\Log;
 
 class AdminThreatController extends Controller
 {
@@ -52,8 +51,6 @@ class AdminThreatController extends Controller
 
     public function update(Request $request, $id)
     {
-        Log::info('Update Threat Request Data:', $request->all());
-
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -63,9 +60,7 @@ class AdminThreatController extends Controller
         $threat = Threat::findOrFail($id);
         $threat->update($request->all());
 
-        Log::info('Updated Threat Data:', $threat->toArray());
-
-        return redirect()->route('threats.index')->with('success', 'Threat updated successfully.');
+        return redirect()->route('threats.view')->with('success', 'Threat updated successfully.');
     }
 
     public function destroy($id)

@@ -19,12 +19,13 @@
             <div class="input-group mt-3">
                 <span class="input-group-text" id="name">Name</span>
                 <input type="text" class="form-control" id="name" name="name"
-                    value="{{ old('name', $threat->name) }}" required>
+                    placeholder="{{ $threat->name }}" value="{{ $threat->name }}">
             </div>
 
             <div class="input-group mt-3">
                 <span class="input-group-text" id="description">Description</span>
-                <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+                <textarea type="text" class="form-control" id="description" name="description"
+                    placeholder="{{ $threat->description }}" required></textarea>
             </div>
 
             <div class="input-group mt-3">
