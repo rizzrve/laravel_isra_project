@@ -33,6 +33,7 @@ class AdminThreatGroupController extends Controller
         $group = ThreatGroup::findOrFail($id);
         $group->update($request->all());
         return redirect()->route('threats.index')->with('success', 'Threat Group updated successfully.');
+
     }
 
     public function destroy($id)

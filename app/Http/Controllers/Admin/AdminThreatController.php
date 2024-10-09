@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Threat;
 use App\Models\ThreatGroup;
+use Illuminate\Support\Facades\Log;
 
 class AdminThreatController extends Controller
 {
@@ -13,7 +14,9 @@ class AdminThreatController extends Controller
     {
         $groups = ThreatGroup::with('threats')->get();
         $groupies = ThreatGroup::all();
-        return view('admin.tthreat-profile.index', compact('groups', 'groupies'));
+        $threats = Threat::all();
+
+        return view('admin.tthreat-profile.index', compact('groups', 'groupies', 'threats'));
     }
     public function index()
     {
@@ -49,6 +52,8 @@ class AdminThreatController extends Controller
 
     public function update(Request $request, $id)
     {
+        Log::info('Update Threat Request Data:', $request->all());
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -57,6 +62,9 @@ class AdminThreatController extends Controller
 
         $threat = Threat::findOrFail($id);
         $threat->update($request->all());
+
+        Log::info('Updated Threat Data:', $threat->toArray());
+
         return redirect()->route('threats.index')->with('success', 'Threat updated successfully.');
     }
 

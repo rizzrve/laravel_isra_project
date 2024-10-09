@@ -32,7 +32,9 @@
                                         <td>
                                             <!-- Edit and Delete Buttons -->
                                             <a href="{{ route('threats.edit', $threat->id) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
+                                                class="btn btn-warning btn-sm">Edit
+                                            </a>
+                                            
                                             <form action="{{ route('threats.destroy', $threat->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')

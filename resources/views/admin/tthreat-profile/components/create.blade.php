@@ -69,8 +69,9 @@
                         </div>
                         <div class="input-group mt-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input"
+                            <textarea type="text" class="form-control" aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default" id="description" name="description" required>
+                            </textarea>
 
                         </div>
                         <div class="input-group mt-3">
@@ -91,6 +92,7 @@
 
     {{-- SUBMIT BUTTON --}}
     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" id="submit-group" form="form-create-group">Create</button>
         <button type="submit" class="btn btn-primary" id="submit-threat" form="form-create-threat">Create</button>
     </div>
