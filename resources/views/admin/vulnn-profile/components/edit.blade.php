@@ -8,32 +8,32 @@
     <div class="modal-body text-center">
 
         <div class="input-group mt-3">
-            <span class="input-group-text">Threat ID</span>
-            <input type="text" class="form-control" value="{{ $threat->id }}" disabled>
+            <span class="input-group-text">Vulnerability ID</span>
+            <input type="text" class="form-control" value="{{ $vuln->id }}" disabled>
         </div>
 
-        <form id="form-edit-threat" action="{{ route('threats.update', $threat->id) }}" method="POST">
+        <form id="form-edit-vuln" action="{{ route('vulnerabilities.update', $vuln->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="input-group mt-3">
                 <span class="input-group-text" id="name">Name</span>
                 <input type="text" class="form-control" id="name" name="name"
-                    placeholder="{{ $threat->name }}" value="{{ $threat->name }}">
+                    placeholder="{{ $vuln->name }}" value="{{ $vuln->name }}">
             </div>
 
             <div class="input-group mt-3">
                 <span class="input-group-text" id="description">Description</span>
-                <textarea type="text" class="form-control" id="description" name="description"
-                    placeholder="{{ $threat->description }}" required></textarea>
+                <textarea type="text" class="form-control" id="description" name="description" placeholder="{{ $vuln->description }}"
+                    required></textarea>
             </div>
 
             <div class="input-group mt-3">
-                <span class="input-group-text" id="threat-group-id">Group</span>
-                <select class="form-select" id="threat_group_id" name="threat_group_id" required>
+                <span class="input-group-text" id="vuln-group-id">Group</span>
+                <select class="form-select" id="vulnerability_group_id" name="vulnerability_group_id" required>
                     @foreach ($groups as $group)
                         <option value="{{ $group->id }}"
-                            {{ $group->id == $threat->threat_group_id ? 'selected' : '' }}>
+                            {{ $group->id == $vuln->vulnerability_group_id ? 'selected' : '' }}>
                             {{ $group->name }}
                         </option>
                     @endforeach
@@ -45,13 +45,13 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" form="form-edit-threat">Save</button>
+        <button type="submit" class="btn btn-primary" form="form-edit-vuln">Save</button>
     </div>
 
 </div>
 
 <script>
-    document.getElementById('form-edit-threat').addEventListener('submit', function(event) {
+    document.getElementById('form-edit-vuln').addEventListener('submit', function(event) {
         console.log('Form is being submitted');
     });
 </script>

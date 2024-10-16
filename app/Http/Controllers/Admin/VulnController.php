@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class VulnController extends Controller
 {
+    public function newView()
+    {
+        $groups = VulnerabilityGroup::with('vulnerabilities')->get();
+        $groupies = VulnerabilityGroup::all();
+        $vulns = Vulnerability::all();
+
+        return view('admin.vulnn-profile.index', compact('groups', 'groupies', 'vulns'));
+    }
+
     public function index()
     {
         $groups = VulnerabilityGroup::with('vulnerabilities')->get();
@@ -30,7 +39,7 @@ class VulnController extends Controller
         ]);
 
         Vulnerability::create($request->all());
-        return redirect()->route('vulnerabilities.index')->with('success', 'Vulnerability created successfully.');
+        return redirect()->route('vulnerabilities.view')->with('success', 'Vulnerability created successfully.');
     }
 
     public function edit($id)
@@ -50,14 +59,14 @@ class VulnController extends Controller
 
         $vulnerability = Vulnerability::findOrFail($id);
         $vulnerability->update($request->all());
-        return redirect()->route('vulnerabilities.index')->with('success', 'Vulnerability updated successfully.');
+        return redirect()->route('vulnerabilities.view')->with('success', 'Vulnerability updated successfully.');
     }
 
     public function destroy($id)
     {
         $vulnerability = Vulnerability::findOrFail($id);
         $vulnerability->delete();
-        return redirect()->route('vulnerabilities.index')->with('success', 'Vulnerability deleted successfully.');
+        return redirect()->route('vulnerabilities.view')->with('success', 'Vulnerability deleted successfully.');
     }
 
     public function getVulnerabilitiesByGroup($groupId)

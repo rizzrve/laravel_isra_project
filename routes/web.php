@@ -195,6 +195,7 @@ use App\Http\Controllers\Admin\VulnController;
 use App\Http\Controllers\Admin\VulnGroupController;
 
 Route::prefix('admin/profile/vulnerabilities/')->group(function () {
+    Route::get('/view', [VulnController::class, 'newView'])->name('vulnerabilities.view');
     Route::get('/', [VulnController::class, 'index'])->name('vulnerabilities.index');
     Route::get('/create', [VulnController::class, 'create'])->name('vulnerabilities.create');
     Route::post('/', [VulnController::class, 'store'])->name('vulnerabilities.store');
@@ -229,7 +230,3 @@ Route::resource('risk_assessments', RiskAssessmentController::class);
 
 Route::get('get-threats-by-group/{groupId}', [ThreatController::class, 'getThreatsByGroup']);
 Route::get('get-vulnerabilities-by-group/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup']);
-
-
-
-
