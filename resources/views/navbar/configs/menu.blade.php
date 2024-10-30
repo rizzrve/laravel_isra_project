@@ -45,7 +45,7 @@
                     User
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">User Listings</a></li>
+                    <li><a class="dropdown-item" href="/admin/user-management/">User Listings</a></li>
                     <li><a class="dropdown-item" href="#">Status</a></li>
                 </ul>
             </li>

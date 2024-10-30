@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 
 // ===================================
@@ -8,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 // ===================================
 Route::get('/', 'App\Http\Controllers\ViewController@landing')
     ->name('landing');
-
 
 // ===================================
 // ===== AUTHENTICATION ROUTES =======
@@ -42,14 +40,6 @@ Route::get('/admin/project/rr', 'App\Http\Controllers\ViewController@adminRR')->
 Route::get('/admin/project/ra', 'App\Http\Controllers\ViewController@adminRA')->name('admin-ra');
 Route::get('/admin/project/rtp', 'App\Http\Controllers\ViewController@adminRTP')->name('admin-rtp');
 Route::get('/admin/project/all', 'App\Http\Controllers\ViewController@adminAll')->name('admin-all');
-
-
-
-
-
-
-
-
 
 Route::middleware('user')->group(function () {
     Route::get('/user', 'App\Http\Controllers\ViewController@user')
@@ -107,9 +97,26 @@ Route::patch('/admin/projects/{id}/update', [ProjectController::class, 'update']
 
 use App\Http\Controllers\ThreatGroupController;
 use App\Http\Controllers\ThreatController;
+use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\VulnerabilityController;
+use App\Http\Controllers\VulnerabilityGroupController;
+use App\Http\Controllers\Admin\TestOrganizationController;
+use App\Http\Controllers\Admin\RTPController;
+use App\Http\Controllers\AssetRegisterController;
+use App\Http\Controllers\RiskAssessmentController;
+use App\Http\Controllers\Admin\VulnController;
+use App\Http\Controllers\Admin\VulnGroupController;
+use App\Http\Controllers\Admin\AdminThreatGroupController;
+use App\Http\Controllers\Admin\AdminThreatController;
 
-
-
+Route::prefix('admin/user-management')->group(function () {
+    Route::get('/', [UserManagementController::class, 'index'])
+        ->name('user-management.index');
+    // Route::get('/search', [UserManagementController::class, 'search'])
+    //     ->name('user-management.search');
+    Route::patch('/update', [UserManagementController::class, 'update'])
+        ->name('user-management.update');
+});
 
 Route::prefix('user/profile/threats')->group(function () {
     Route::get('/', [ThreatController::class, 'index'])->name('threats.index');
@@ -127,9 +134,6 @@ Route::prefix('user/profile/threats')->group(function () {
     Route::delete('/groups/{group}', [ThreatGroupController::class, 'destroy'])->name('threat-groups.destroy');
 });
 
-use App\Http\Controllers\VulnerabilityController;
-use App\Http\Controllers\VulnerabilityGroupController;
-
 Route::prefix('user/profile/Vulnerability')->group(function () {
     Route::get('/', [VulnerabilityController::class, 'index'])->name('vulnerabilities.index');
     Route::get('/create', [VulnerabilityController::class, 'create'])->name('vulnerabilities.create');
@@ -146,21 +150,15 @@ Route::prefix('user/profile/Vulnerability')->group(function () {
     Route::delete('/groups/{group}', [VulnerabilityGroupController::class, 'destroy'])->name('vulnerability-groups.destroy');
 });
 
-use App\Http\Controllers\Admin\TestOrganizationController;
-
 Route::get('/admin/test/organizations', [TestOrganizationController::class, 'view'])->name('test.organizations');
 Route::post('/admin/test/organizations', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
 Route::patch('/admin/test/organizations/{id}/update', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
-
-use App\Http\Controllers\Admin\RTPController;
 
 Route::prefix('/admin/rtp')->group(function () {
     Route::get('/', [RTPController::class, 'view'])->name('rtp');
     // Route::post('', [TestOrganizationController::class, 'create'])->name('test.organizations.create');
     // Route::patch('', [TestOrganizationController::class, 'update'])->name('test.organizations.update');
 });;
-
-use App\Http\Controllers\AssetRegisterController;
 
 Route::prefix('user/asset_register')->group(function () {
     Route::get('/', [AssetRegisterController::class, 'index'])->name('assets.index');
@@ -170,9 +168,6 @@ Route::prefix('user/asset_register')->group(function () {
     Route::put('/{id}', [AssetRegisterController::class, 'update'])->name('assets.update');
     Route::delete('/{id}', [AssetRegisterController::class, 'destroy'])->name('assets.destroy');
 });
-
-use App\Http\Controllers\Admin\AdminThreatGroupController;
-use App\Http\Controllers\Admin\AdminThreatController;
 
 Route::prefix('admin/profile/threats/')->group(function () {
     Route::get('/view', [AdminThreatController::class, 'newView'])->name('threats.view');
@@ -191,9 +186,6 @@ Route::prefix('admin/profile/threats/')->group(function () {
     Route::delete('/groups/{group}', [AdminThreatGroupController::class, 'destroy'])->name('threat-groups.destroy');
 });
 
-use App\Http\Controllers\Admin\VulnController;
-use App\Http\Controllers\Admin\VulnGroupController;
-
 Route::prefix('admin/profile/vulnerabilities/')->group(function () {
     Route::get('/view', [VulnController::class, 'newView'])->name('vulnerabilities.view');
     Route::get('/', [VulnController::class, 'index'])->name('vulnerabilities.index');
@@ -211,15 +203,10 @@ Route::prefix('admin/profile/vulnerabilities/')->group(function () {
     Route::delete('/groups/{group}', [VulnGroupController::class, 'destroy'])->name('vulnerability-groups.destroy');
 });
 
-
-use App\Http\Controllers\RiskAssessmentController;
-
 Route::resource('risk_assessments', RiskAssessmentController::class);
 // routes/web.php
 Route::get('/threats/group/{groupId}', [ThreatController::class, 'getThreatsByGroup'])->name('threats.byGroup');
 Route::get('/vulnerabilities/group/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup'])->name('vulnerabilities.byGroup');
-
-
 
 Route::get('/threats/{groupId}', [ThreatController::class, 'getThreatsByGroup']);
 Route::get('/vulnerabilities/{groupId}', [VulnerabilityController::class, 'getVulnerabilitiesByGroup']);
